@@ -11,6 +11,7 @@ import AuthPage from './pages/AuthPage';
 import AuthCallback from './pages/AuthCallback';
 import DashboardPage from './pages/DashboardPage';
 import AtlasPage from './pages/AtlasPage';
+import CountryDetailPage from './pages/CountryDetailPage';
 import RegionDetailPage from './pages/RegionDetailPage';
 import GrapesPage from './pages/GrapesPage';
 import GrapeDetailPage from './pages/GrapeDetailPage';
@@ -61,7 +62,7 @@ const AppRouter = () => {
       
       {/* Atlas & Grapes - Public */}
       <Route path="/atlas" element={<Layout><AtlasPage /></Layout>} />
-      <Route path="/atlas/:countryId" element={<Layout><AtlasPage /></Layout>} />
+      <Route path="/atlas/:countryId" element={<Layout><CountryDetailPage /></Layout>} />
       <Route path="/atlas/region/:regionId" element={<Layout><RegionDetailPage /></Layout>} />
       <Route path="/grapes" element={<Layout><GrapesPage /></Layout>} />
       <Route path="/grapes/:grapeId" element={<Layout><GrapeDetailPage /></Layout>} />
