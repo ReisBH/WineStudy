@@ -120,7 +120,7 @@ const AuthPage = ({ mode = 'login' }) => {
                     data-testid="name-input"
                     id="name"
                     type="text"
-                    placeholder="Seu nome"
+                    placeholder={language === 'pt' ? 'Seu nome' : 'Your name'}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="pl-10 py-6 rounded-sm"
