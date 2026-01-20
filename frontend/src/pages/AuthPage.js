@@ -73,10 +73,10 @@ const AuthPage = ({ mode = 'login' }) => {
               <span className="font-serif text-2xl font-bold">WineStudy</span>
             </Link>
             <h1 className="font-serif text-3xl font-bold mb-2">
-              {isLogin ? t('auth.login') : t('auth.register')}
+              {isLogin ? t('auth.loginTitle') : t('auth.registerTitle')}
             </h1>
             <p className="text-muted-foreground">
-              {isLogin ? 'Bem-vindo de volta!' : 'Crie sua conta e comece a aprender'}
+              {isLogin ? t('auth.loginSubtitle') : t('auth.registerSubtitle')}
             </p>
           </div>
 
