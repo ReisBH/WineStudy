@@ -33,6 +33,12 @@ Aplicativo educacional para estudo de vinhos com foco em conteúdo WSET, incluin
 **Diário de Degustação (P1):**
 - [x] Formulário completo baseado em WSET SAT
 - [x] Páginas de listagem e visualização individual
+- [x] **Formulário Atualizado com Critérios Completos** (20/01/2026):
+  - Informações: Nome, Produtor, Ano, Região
+  - Aparência: Limpidez, Intensidade, Cor
+  - Nariz: Condição, Intensidade, Desenvolvimento, Características Aromáticas
+  - Boca: Doçura, Acidez, Tanino, Álcool, Corpo, Intensidade, Final, Características de Sabor
+  - Conclusões: Qualidade, Prontidão para Consumo, Notas Adicionais
 
 **Tags de Aroma Relacionais (P2):**
 - [x] Página `/aromas/:aromaId` mostra castas com o aroma selecionado
