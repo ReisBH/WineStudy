@@ -49,17 +49,24 @@ const RegionDetailPage = () => {
             setCountry(await countryRes.json());
           }
           
-          // Fetch related grapes
-          const grapesRes = await fetch(`${API}/grapes`);
-          if (grapesRes.ok) {
-            const allGrapes = await grapesRes.json();
-            const related = allGrapes.filter(g => 
-              regionData.main_grapes?.some(mg => 
-                g.name.toLowerCase().includes(mg.toLowerCase()) ||
-                mg.toLowerCase().includes(g.name.toLowerCase())
-              )
-            );
-            setRelatedGrapes(related);
+          // Fetch related grapes - use key_grapes or main_grapes
+          const grapeNames = regionData.key_grapes?.length > 0 
+            ? regionData.key_grapes 
+            : regionData.main_grapes || [];
+          
+          if (grapeNames.length > 0) {
+            const grapesRes = await fetch(`${API}/grapes`);
+            if (grapesRes.ok) {
+              const allGrapes = await grapesRes.json();
+              const related = allGrapes.filter(g => 
+                grapeNames.some(mg => 
+                  g.name.toLowerCase() === mg.toLowerCase() ||
+                  g.name.toLowerCase().includes(mg.toLowerCase()) ||
+                  mg.toLowerCase().includes(g.name.toLowerCase())
+                )
+              );
+              setRelatedGrapes(related);
+            }
           }
         }
       } catch (error) {
