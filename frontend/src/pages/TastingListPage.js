@@ -28,6 +28,7 @@ const qualityColors = {
   poor: 'bg-red-500/10 text-red-600',
   acceptable: 'bg-orange-500/10 text-orange-600',
   good: 'bg-green-500/10 text-green-600',
+  very_good: 'bg-blue-500/10 text-blue-600',
   veryGood: 'bg-blue-500/10 text-blue-600',
   outstanding: 'bg-gold-500/10 text-gold-600',
 };
