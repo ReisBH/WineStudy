@@ -170,7 +170,9 @@ const LessonPage = () => {
           >
             <Card className="border-border/40 sticky top-24">
               <CardContent className="p-4">
-                <h3 className="font-medium mb-3 text-sm">Lições</h3>
+                <h3 className="font-medium mb-3 text-sm">
+                  {language === 'pt' ? 'Lições' : 'Lessons'}
+                </h3>
                 <div className="space-y-1">
                   {lessons.map((lesson, index) => {
                     const isActive = lesson.lesson_id === currentLesson.lesson_id;
