@@ -42,6 +42,7 @@ export const Navbar = () => {
   const navLinks = [
     { href: '/atlas', label: t('nav.atlas'), icon: Globe },
     { href: '/grapes', label: t('nav.grapes'), icon: GlassWater },
+    { href: '/production', label: language === 'pt' ? 'Produção' : 'Production', icon: Factory },
     { href: '/study', label: t('nav.study'), icon: BookOpen },
     { href: '/tasting', label: t('nav.tasting'), icon: Wine },
   ];
