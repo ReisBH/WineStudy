@@ -239,7 +239,7 @@ const LessonPage = () => {
                         className="rounded-sm"
                       >
                         <ChevronLeft className="w-4 h-4 mr-2" />
-                        Anterior
+                        {t('study.previousLesson')}
                       </Button>
                     )}
                   </div>
@@ -252,7 +252,7 @@ const LessonPage = () => {
                         className="bg-wine-500 hover:bg-wine-600 text-white rounded-sm"
                       >
                         <CheckCircle className="w-4 h-4 mr-2" />
-                        Marcar como Concluída
+                        {t('study.markComplete')}
                       </Button>
                     )}
                     
@@ -261,7 +261,7 @@ const LessonPage = () => {
                         onClick={() => navigateToLesson(nextLesson)}
                         className="bg-wine-500 hover:bg-wine-600 text-white rounded-sm"
                       >
-                        Próxima
+                        {t('study.nextLesson')}
                         <ChevronRight className="w-4 h-4 ml-2" />
                       </Button>
                     )}
@@ -270,7 +270,7 @@ const LessonPage = () => {
                       <Link to={`/quiz?track=${trackId}`}>
                         <Button className="bg-gold-500 hover:bg-gold-600 text-white rounded-sm">
                           <Brain className="w-4 h-4 mr-2" />
-                          Fazer Quiz
+                          {t('study.takeQuiz')}
                         </Button>
                       </Link>
                     )}
