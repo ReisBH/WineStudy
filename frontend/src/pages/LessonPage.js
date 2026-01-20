@@ -145,7 +145,7 @@ const LessonPage = () => {
           <div className="flex items-center justify-between mb-4">
             <div>
               <span className="text-sm text-muted-foreground">
-                Lição {currentIndex + 1} de {lessons.length}
+                {t('study.lesson')} {currentIndex + 1} {language === 'pt' ? 'de' : 'of'} {lessons.length}
               </span>
               <h1 className="font-serif text-2xl sm:text-3xl font-bold">
                 {language === 'pt' ? currentLesson.title_pt : currentLesson.title_en}
@@ -153,7 +153,7 @@ const LessonPage = () => {
             </div>
             <div className="flex items-center gap-2 text-muted-foreground">
               <Clock className="w-4 h-4" />
-              <span className="text-sm">{currentLesson.duration_minutes} min</span>
+              <span className="text-sm">{currentLesson.duration_minutes} {t('study.minutes')}</span>
             </div>
           </div>
 
