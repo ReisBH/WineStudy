@@ -850,6 +850,1080 @@ async def seed_database():
 async def root():
     return {"message": "WineStudy API v1.0", "status": "healthy"}
 
+# ======================== EXPAND CONTENT ENDPOINT ========================
+
+@api_router.post("/seed/expand")
+async def expand_content():
+    """Expand the database with more lessons and quiz questions"""
+    
+    # Check if lessons already expanded
+    lesson_count = await db.lessons.count_documents({})
+    if lesson_count > 10:
+        return {"message": "Content already expanded", "lesson_count": lesson_count}
+    
+    # Intermediate Lessons
+    intermediate_lessons = [
+        {
+            "lesson_id": "intermediate_1", "track_id": "intermediate", "order": 1,
+            "title_pt": "O Conceito de Terroir", "title_en": "The Concept of Terroir",
+            "content_pt": """Terroir é um conceito francês que engloba todos os fatores naturais que influenciam o vinho final. Não existe tradução exata, mas podemos entendê-lo como a "expressão do lugar".
+
+**Componentes do Terroir:**
+
+**1. Solo (Géologie)**
+O tipo de solo influencia diretamente a videira:
+- **Calcário**: Confere mineralidade e elegância (Borgonha, Champagne)
+- **Cascalho**: Excelente drenagem, concentra sabores (Médoc, Graves)
+- **Xisto**: Retém calor, ideal para Douro e Priorat
+- **Argila**: Retenção de água, vinhos mais encorpados
+- **Arenoso**: Vinhos mais leves e aromáticos
+
+**2. Clima (Climat)**
+- **Macroclima**: Condições gerais da região
+- **Mesoclima**: Influência de colinas, rios, florestas
+- **Microclima**: Condições específicas do vinhedo
+
+**3. Topografia**
+- Altitude: Maior altitude = maior amplitude térmica
+- Exposição solar: Encostas sul (hemisfério norte) recebem mais sol
+- Inclinação: Afeta drenagem e exposição
+
+**4. O Fator Humano**
+Embora controverso, muitos consideram que as práticas vitícolas e de vinificação tradicionais também fazem parte do terroir.""",
+            "content_en": """Terroir is a French concept that encompasses all natural factors influencing the final wine. There's no exact translation, but we can understand it as the "expression of place".
+
+**Components of Terroir:**
+
+**1. Soil (Géologie)**
+Soil type directly influences the vine:
+- **Limestone**: Provides minerality and elegance (Burgundy, Champagne)
+- **Gravel**: Excellent drainage, concentrates flavors (Médoc, Graves)
+- **Schist**: Retains heat, ideal for Douro and Priorat
+- **Clay**: Water retention, fuller-bodied wines
+- **Sandy**: Lighter, more aromatic wines
+
+**2. Climate (Climat)**
+- **Macroclimate**: General regional conditions
+- **Mesoclimate**: Influence of hills, rivers, forests
+- **Microclimate**: Specific vineyard conditions
+
+**3. Topography**
+- Altitude: Higher altitude = greater temperature variation
+- Sun exposure: South-facing slopes (northern hemisphere) receive more sun
+- Slope: Affects drainage and exposure
+
+**4. The Human Factor**
+Although controversial, many consider traditional viticultural and winemaking practices part of terroir.""",
+            "duration_minutes": 20
+        },
+        {
+            "lesson_id": "intermediate_2", "track_id": "intermediate", "order": 2,
+            "title_pt": "Bordeaux: A Região Clássica", "title_en": "Bordeaux: The Classic Region",
+            "content_pt": """Bordeaux é sinônimo de excelência em vinhos tintos. Localizada no sudoeste da França, é a maior região de vinhos finos do mundo.
+
+**Margem Esquerda vs Margem Direita**
+
+O rio Gironda divide Bordeaux em duas margens distintas:
+
+**Margem Esquerda (Médoc, Graves)**
+- Solos de cascalho
+- Clima mais moderado
+- Cabernet Sauvignon domina
+- Vinhos mais estruturados e tânicos
+- Appellations: Margaux, Pauillac, Saint-Julien, Saint-Estèphe
+
+**Margem Direita (Saint-Émilion, Pomerol)**
+- Solos de argila e calcário
+- Merlot domina
+- Vinhos mais macios e frutados
+- Châteaux menores e mais artesanais
+
+**Classificação de 1855**
+O sistema de classificação ainda usado hoje foi criado para a Exposição Universal de Paris:
+- 5 níveis de Crus Classés (Premier Cru a Cinquième Cru)
+- Apenas 61 châteaux do Médoc e 1 de Graves (Haut-Brion)
+- Sauternes também classificado separadamente
+
+**O Blend Bordalês**
+A maioria dos vinhos de Bordeaux são blends:
+- Tintos: Cabernet Sauvignon + Merlot + Cabernet Franc (+ Petit Verdot, Malbec)
+- Brancos: Sauvignon Blanc + Sémillon
+- Doces (Sauternes): Sémillon + Sauvignon Blanc afetados por Botrytis""",
+            "content_en": """Bordeaux is synonymous with red wine excellence. Located in southwestern France, it's the world's largest fine wine region.
+
+**Left Bank vs Right Bank**
+
+The Gironde river divides Bordeaux into two distinct banks:
+
+**Left Bank (Médoc, Graves)**
+- Gravel soils
+- More moderate climate
+- Cabernet Sauvignon dominates
+- More structured and tannic wines
+- Appellations: Margaux, Pauillac, Saint-Julien, Saint-Estèphe
+
+**Right Bank (Saint-Émilion, Pomerol)**
+- Clay and limestone soils
+- Merlot dominates
+- Softer, fruitier wines
+- Smaller, more artisanal châteaux
+
+**1855 Classification**
+The classification system still used today was created for the Paris Universal Exhibition:
+- 5 levels of Crus Classés (Premier Cru to Cinquième Cru)
+- Only 61 châteaux from Médoc and 1 from Graves (Haut-Brion)
+- Sauternes also classified separately
+
+**The Bordeaux Blend**
+Most Bordeaux wines are blends:
+- Reds: Cabernet Sauvignon + Merlot + Cabernet Franc (+ Petit Verdot, Malbec)
+- Whites: Sauvignon Blanc + Sémillon
+- Sweet (Sauternes): Sémillon + Sauvignon Blanc affected by Botrytis""",
+            "duration_minutes": 18
+        },
+        {
+            "lesson_id": "intermediate_3", "track_id": "intermediate", "order": 3,
+            "title_pt": "Borgonha: O Berço do Terroir", "title_en": "Burgundy: The Birthplace of Terroir",
+            "content_pt": """A Borgonha é onde o conceito de terroir foi desenvolvido. Com apenas duas uvas principais, a região demonstra como o lugar define o vinho.
+
+**Sistema de Classificação**
+
+A Borgonha usa um sistema hierárquico baseado em vinhedos (climats):
+
+**1. Grand Cru (1-2% da produção)**
+- Os melhores vinhedos
+- Nome do vinhedo no rótulo (ex: "Romanée-Conti")
+- 33 Grand Crus para tintos e brancos
+
+**2. Premier Cru (10-12%)**
+- Vinhedos de alta qualidade
+- Nome da vila + "Premier Cru" + nome do vinhedo
+
+**3. Village (35-40%)**
+- Vinhos da vila específica
+- Ex: "Gevrey-Chambertin", "Meursault"
+
+**4. Régional (50%)**
+- Denominações regionais
+- Ex: "Bourgogne Rouge", "Bourgogne Blanc"
+
+**As Sub-regiões**
+
+- **Chablis**: Chardonnay mineral, sem madeira
+- **Côte de Nuits**: Pinot Noir de grande longevidade
+- **Côte de Beaune**: Chardonnay elegante + bons tintos
+- **Côte Chalonnaise**: Excelente custo-benefício
+- **Mâconnais**: Chardonnay acessível
+
+**Pinot Noir na Borgonha**
+- Expressa nuances sutis do terroir
+- Taninos delicados, acidez vibrante
+- Aromas de cereja, framboesa, terra, cogumelos
+- Grande potencial de envelhecimento""",
+            "content_en": """Burgundy is where the concept of terroir was developed. With only two main grapes, the region demonstrates how place defines wine.
+
+**Classification System**
+
+Burgundy uses a hierarchical system based on vineyards (climats):
+
+**1. Grand Cru (1-2% of production)**
+- The best vineyards
+- Vineyard name on label (e.g., "Romanée-Conti")
+- 33 Grand Crus for reds and whites
+
+**2. Premier Cru (10-12%)**
+- High-quality vineyards
+- Village name + "Premier Cru" + vineyard name
+
+**3. Village (35-40%)**
+- Wines from specific village
+- E.g., "Gevrey-Chambertin", "Meursault"
+
+**4. Régional (50%)**
+- Regional denominations
+- E.g., "Bourgogne Rouge", "Bourgogne Blanc"
+
+**The Sub-regions**
+
+- **Chablis**: Mineral Chardonnay, no oak
+- **Côte de Nuits**: Age-worthy Pinot Noir
+- **Côte de Beaune**: Elegant Chardonnay + good reds
+- **Côte Chalonnaise**: Excellent value
+- **Mâconnais**: Accessible Chardonnay
+
+**Pinot Noir in Burgundy**
+- Expresses subtle terroir nuances
+- Delicate tannins, vibrant acidity
+- Aromas of cherry, raspberry, earth, mushrooms
+- Great aging potential""",
+            "duration_minutes": 18
+        },
+        {
+            "lesson_id": "intermediate_4", "track_id": "intermediate", "order": 4,
+            "title_pt": "Métodos de Vinificação: Tintos", "title_en": "Winemaking Methods: Reds",
+            "content_pt": """A vinificação de tintos envolve etapas específicas que definem o estilo final do vinho.
+
+**Etapas da Vinificação**
+
+**1. Recepção e Desengace**
+- Seleção das uvas (manual ou ótica)
+- Desengace: remoção dos engaços (hastes)
+- Opção de manter engaços: mais tanino e frescor
+
+**2. Maceração e Fermentação**
+A maceração extrai cor, taninos e aromas das cascas:
+
+- **Maceração a frio (5-10°C)**: Extrai cor e aromas sem taninos
+- **Fermentação (20-30°C)**: Leveduras convertem açúcar em álcool
+- **Remontagem**: Bombear o mosto sobre as cascas
+- **Pigeage**: Afundar as cascas manualmente
+
+**3. Fermentação Malolática**
+- Converte ácido málico em ácido lático
+- Reduz acidez, adiciona cremosidade
+- Essencial para tintos, opcional para brancos
+
+**4. Envelhecimento**
+Opções de recipiente:
+- **Inox**: Preserva frescor e fruta
+- **Carvalho novo**: Adiciona baunilha, especiarias, taninos
+- **Carvalho usado**: Oxigenação suave sem sabores de madeira
+- **Concreto/Ânfora**: Neutralidade com micro-oxigenação
+
+**5. Clarificação e Filtração**
+- Colagem com bentonita, clara de ovo ou outros agentes
+- Filtração para remover partículas
+- Alguns produtores optam por não filtrar
+
+**Maceração Carbônica**
+- Uvas inteiras em ambiente de CO2
+- Fermentação intracelular
+- Produz vinhos frutados e leves
+- Típico do Beaujolais Nouveau""",
+            "content_en": """Red winemaking involves specific stages that define the wine's final style.
+
+**Winemaking Stages**
+
+**1. Reception and Destemming**
+- Grape selection (manual or optical)
+- Destemming: removing stems
+- Option to keep stems: more tannin and freshness
+
+**2. Maceration and Fermentation**
+Maceration extracts color, tannins and aromas from skins:
+
+- **Cold maceration (5-10°C)**: Extracts color and aromas without tannins
+- **Fermentation (20-30°C)**: Yeasts convert sugar to alcohol
+- **Pump-over**: Pumping must over the skins
+- **Punch-down**: Manually submerging skins
+
+**3. Malolactic Fermentation**
+- Converts malic acid to lactic acid
+- Reduces acidity, adds creaminess
+- Essential for reds, optional for whites
+
+**4. Aging**
+Vessel options:
+- **Stainless steel**: Preserves freshness and fruit
+- **New oak**: Adds vanilla, spice, tannins
+- **Used oak**: Gentle oxygenation without wood flavors
+- **Concrete/Amphora**: Neutrality with micro-oxygenation
+
+**5. Fining and Filtration**
+- Fining with bentonite, egg white or other agents
+- Filtration to remove particles
+- Some producers choose not to filter
+
+**Carbonic Maceration**
+- Whole grapes in CO2 environment
+- Intracellular fermentation
+- Produces fruity, light wines
+- Typical of Beaujolais Nouveau""",
+            "duration_minutes": 20
+        },
+        {
+            "lesson_id": "intermediate_5", "track_id": "intermediate", "order": 5,
+            "title_pt": "Métodos de Vinificação: Brancos", "title_en": "Winemaking Methods: Whites",
+            "content_pt": """A vinificação de brancos difere dos tintos principalmente pela ausência de maceração prolongada.
+
+**Etapas da Vinificação de Brancos**
+
+**1. Colheita e Prensagem**
+- Colheita mais cedo para preservar acidez
+- Prensagem rápida para evitar oxidação
+- Separação do mosto das cascas antes da fermentação
+
+**2. Clarificação do Mosto**
+- Débourbage: decantação a frio (12-24h)
+- Remove partículas sólidas
+- Resulta em vinhos mais limpos
+
+**3. Fermentação**
+- Temperatura mais baixa (12-18°C) para preservar aromas
+- Pode ser em inox (frescor) ou barrica (complexidade)
+- Fermentação mais longa que tintos
+
+**Técnicas Especiais**
+
+**Bâtonnage (Batimento das Borras)**
+- Agitar as borras finas durante envelhecimento
+- Adiciona textura cremosa e complexidade
+- Típico de Borgonha branca
+
+**Fermentação em Barrica**
+- Fermentação em carvalho novo ou usado
+- Integração mais harmoniosa da madeira
+- Adiciona notas de baunilha, noz, manteiga
+
+**Maceração Pelicular**
+- Contato breve com as cascas (2-24h)
+- Adiciona textura e aromas
+- Base dos "Orange Wines"
+
+**Estilos de Chardonnay**
+
+- **Chablis**: Inox, mineral, cítrico
+- **Borgonha**: Barrica, amanteigado, noz
+- **Novo Mundo**: Carvalho intenso, tropical
+
+**Preservação da Acidez**
+- Fermentação a frio
+- Evitar ou controlar FML
+- Colheita antecipada""",
+            "content_en": """White winemaking differs from reds mainly by the absence of prolonged maceration.
+
+**White Winemaking Stages**
+
+**1. Harvest and Pressing**
+- Earlier harvest to preserve acidity
+- Quick pressing to avoid oxidation
+- Separation of must from skins before fermentation
+
+**2. Must Clarification**
+- Débourbage: cold settling (12-24h)
+- Removes solid particles
+- Results in cleaner wines
+
+**3. Fermentation**
+- Lower temperature (12-18°C) to preserve aromas
+- Can be in stainless (freshness) or barrel (complexity)
+- Longer fermentation than reds
+
+**Special Techniques**
+
+**Bâtonnage (Lees Stirring)**
+- Stirring fine lees during aging
+- Adds creamy texture and complexity
+- Typical of white Burgundy
+
+**Barrel Fermentation**
+- Fermentation in new or used oak
+- More harmonious wood integration
+- Adds vanilla, nut, butter notes
+
+**Skin Contact**
+- Brief contact with skins (2-24h)
+- Adds texture and aromas
+- Basis of "Orange Wines"
+
+**Chardonnay Styles**
+
+- **Chablis**: Stainless, mineral, citrus
+- **Burgundy**: Barrel, buttery, nutty
+- **New World**: Intense oak, tropical
+
+**Acidity Preservation**
+- Cold fermentation
+- Avoid or control MLF
+- Early harvest""",
+            "duration_minutes": 18
+        },
+        {
+            "lesson_id": "intermediate_6", "track_id": "intermediate", "order": 6,
+            "title_pt": "Espumantes: Métodos de Produção", "title_en": "Sparkling: Production Methods",
+            "content_pt": """Os vinhos espumantes são definidos pelo seu método de produção, que determina a qualidade e o estilo das bolhas.
+
+**Método Tradicional (Champenoise)**
+Usado em: Champagne, Cava, Crémant, Franciacorta
+
+1. **Vinho Base**: Fermentação normal de uvas
+2. **Tiragem**: Adição de leveduras e açúcar
+3. **Segunda Fermentação**: Na garrafa, produz CO2
+4. **Sur Lie**: Envelhecimento sobre borras (mínimo 15 meses para Champagne)
+5. **Remuage**: Girar garrafas para concentrar borras no gargalo
+6. **Dégorgement**: Remover borras congeladas
+7. **Dosage**: Adicionar licor de expedição (define doçura)
+
+**Níveis de Doçura**
+- Brut Nature: 0-3 g/L
+- Extra Brut: 0-6 g/L
+- Brut: 0-12 g/L
+- Extra Dry: 12-17 g/L
+- Sec: 17-32 g/L
+- Demi-Sec: 32-50 g/L
+
+**Método Charmat (Tanque)**
+Usado em: Prosecco, Lambrusco
+
+- Segunda fermentação em tanques pressurizados
+- Mais rápido e econômico
+- Bolhas maiores, menos persistentes
+- Preserva frescor e aromas primários
+
+**Método Ancestral**
+- Apenas uma fermentação
+- Engarrafamento antes do fim da fermentação
+- Leve turvação natural
+- Usado em Pét-Nat
+
+**Champagne: Especificidades**
+- Apenas 3 uvas: Chardonnay, Pinot Noir, Pinot Meunier
+- Blanc de Blancs: 100% Chardonnay
+- Blanc de Noirs: Uvas tintas vinificadas em branco
+- Rosé: Blend ou maceração curta""",
+            "content_en": """Sparkling wines are defined by their production method, which determines the quality and style of bubbles.
+
+**Traditional Method (Champenoise)**
+Used in: Champagne, Cava, Crémant, Franciacorta
+
+1. **Base Wine**: Normal fermentation of grapes
+2. **Tirage**: Addition of yeast and sugar
+3. **Second Fermentation**: In bottle, produces CO2
+4. **Sur Lie**: Aging on lees (minimum 15 months for Champagne)
+5. **Riddling**: Rotating bottles to concentrate lees in neck
+6. **Disgorgement**: Removing frozen lees
+7. **Dosage**: Adding expedition liquor (defines sweetness)
+
+**Sweetness Levels**
+- Brut Nature: 0-3 g/L
+- Extra Brut: 0-6 g/L
+- Brut: 0-12 g/L
+- Extra Dry: 12-17 g/L
+- Sec: 17-32 g/L
+- Demi-Sec: 32-50 g/L
+
+**Charmat Method (Tank)**
+Used in: Prosecco, Lambrusco
+
+- Second fermentation in pressurized tanks
+- Faster and more economical
+- Larger, less persistent bubbles
+- Preserves freshness and primary aromas
+
+**Ancestral Method**
+- Only one fermentation
+- Bottling before fermentation ends
+- Light natural cloudiness
+- Used in Pét-Nat
+
+**Champagne: Specifics**
+- Only 3 grapes: Chardonnay, Pinot Noir, Pinot Meunier
+- Blanc de Blancs: 100% Chardonnay
+- Blanc de Noirs: Red grapes vinified as white
+- Rosé: Blend or short maceration""",
+            "duration_minutes": 20
+        },
+        {
+            "lesson_id": "intermediate_7", "track_id": "intermediate", "order": 7,
+            "title_pt": "Vinhos Doces e Fortificados", "title_en": "Sweet and Fortified Wines",
+            "content_pt": """Vinhos doces e fortificados representam algumas das maiores expressões da arte vinícola.
+
+**Métodos para Vinhos Doces**
+
+**1. Colheita Tardia (Late Harvest)**
+- Uvas colhidas após maturação completa
+- Concentração natural de açúcar
+- Exemplos: Spätlese, Auslese (Alemanha)
+
+**2. Botrytis Cinerea (Podridão Nobre)**
+- Fungo que desidrata as uvas
+- Concentra açúcares e adiciona aromas únicos (mel, damasco)
+- Regiões: Sauternes, Tokaji, Trockenbeerenauslese
+- Condições específicas: manhãs úmidas, tardes secas
+
+**3. Vinho de Gelo (Icewine/Eiswein)**
+- Uvas congeladas naturalmente na videira (-7°C a -8°C)
+- Prensagem congela a água, concentrando açúcar
+- Produzido no Canadá, Alemanha, Áustria
+
+**4. Passificação**
+- Secagem das uvas após colheita
+- Perde água, concentra açúcar
+- Exemplos: Amarone, Vin Santo, Passito
+
+**Vinhos Fortificados**
+
+**Porto**
+- Fortificado durante fermentação (77% aguardente vínica)
+- Estilos: Ruby, Tawny, Vintage, LBV, Vintage
+- Colheita e Vintage: envelhecidos em garrafa
+- Tawny: envelhecido em barrica (oxidativo)
+
+**Jerez (Sherry)**
+- Produzido em Jerez, Espanha
+- Sistema Solera: blend de várias safras
+- Estilos: Fino, Manzanilla (sob flor), Oloroso, PX
+
+**Madeira**
+- Fortificado e aquecido (estufagem)
+- Indestrutível: pode durar séculos
+- Estilos por uva: Sercial, Verdelho, Bual, Malmsey""",
+            "content_en": """Sweet and fortified wines represent some of the greatest expressions of winemaking art.
+
+**Methods for Sweet Wines**
+
+**1. Late Harvest**
+- Grapes harvested after full ripeness
+- Natural sugar concentration
+- Examples: Spätlese, Auslese (Germany)
+
+**2. Botrytis Cinerea (Noble Rot)**
+- Fungus that dehydrates grapes
+- Concentrates sugars and adds unique aromas (honey, apricot)
+- Regions: Sauternes, Tokaji, Trockenbeerenauslese
+- Specific conditions: humid mornings, dry afternoons
+
+**3. Ice Wine (Icewine/Eiswein)**
+- Grapes naturally frozen on vine (-7°C to -8°C)
+- Pressing freezes water, concentrating sugar
+- Produced in Canada, Germany, Austria
+
+**4. Dried Grape Wines**
+- Drying grapes after harvest
+- Loses water, concentrates sugar
+- Examples: Amarone, Vin Santo, Passito
+
+**Fortified Wines**
+
+**Port**
+- Fortified during fermentation (77% grape spirit)
+- Styles: Ruby, Tawny, Vintage, LBV, Vintage
+- Vintage: bottle-aged
+- Tawny: barrel-aged (oxidative)
+
+**Sherry**
+- Produced in Jerez, Spain
+- Solera system: blend of multiple vintages
+- Styles: Fino, Manzanilla (under flor), Oloroso, PX
+
+**Madeira**
+- Fortified and heated (estufagem)
+- Indestructible: can last centuries
+- Styles by grape: Sercial, Verdelho, Bual, Malmsey""",
+            "duration_minutes": 22
+        },
+        {
+            "lesson_id": "intermediate_8", "track_id": "intermediate", "order": 8,
+            "title_pt": "Itália e Espanha: Tradições Mediterrâneas", "title_en": "Italy and Spain: Mediterranean Traditions",
+            "content_pt": """Itália e Espanha compartilham clima mediterrâneo mas possuem tradições vinícolas distintas.
+
+**ITÁLIA**
+
+**Sistema de Classificação**
+- DOCG: Denominação de Origem Controlada e Garantida (mais alto)
+- DOC: Denominação de Origem Controlada
+- IGT: Indicação Geográfica Típica (permite mais liberdade)
+- Vino: Vinho de mesa
+
+**Principais Regiões**
+- **Piemonte**: Nebbiolo (Barolo, Barbaresco), Barbera, Moscato
+- **Toscana**: Sangiovese (Chianti, Brunello), Super Toscanos
+- **Vêneto**: Corvina (Amarone, Valpolicella), Prosecco
+- **Trentino-Alto Ádige**: Pinot Grigio, Gewürztraminer
+
+**Castas Importantes**
+- Nebbiolo: Taninos firmes, aromas de rosa e alcatrão
+- Sangiovese: Acidez alta, cereja, ervas
+- Corvina: Base do Amarone e Valpolicella
+
+**ESPANHA**
+
+**Sistema de Classificação**
+- DOCa/DOQ: Denominação de Origem Qualificada (Rioja, Priorat)
+- DO: Denominação de Origem
+- Vino de Pago: Vinhedos únicos de alta qualidade
+
+**Sistema de Envelhecimento**
+- Joven: Sem envelhecimento obrigatório
+- Crianza: 2 anos (6 meses em carvalho)
+- Reserva: 3 anos (1 ano em carvalho)
+- Gran Reserva: 5 anos (18 meses em carvalho)
+
+**Principais Regiões**
+- **Rioja**: Tempranillo, estilo clássico com carvalho americano
+- **Ribera del Duero**: Tempranillo potente e moderno
+- **Priorat**: Garnacha e Cariñena em xisto, vinhos concentrados
+- **Rías Baixas**: Albariño, brancos aromáticos""",
+            "content_en": """Italy and Spain share a Mediterranean climate but have distinct wine traditions.
+
+**ITALY**
+
+**Classification System**
+- DOCG: Controlled and Guaranteed Designation of Origin (highest)
+- DOC: Controlled Designation of Origin
+- IGT: Typical Geographic Indication (allows more freedom)
+- Vino: Table wine
+
+**Main Regions**
+- **Piedmont**: Nebbiolo (Barolo, Barbaresco), Barbera, Moscato
+- **Tuscany**: Sangiovese (Chianti, Brunello), Super Tuscans
+- **Veneto**: Corvina (Amarone, Valpolicella), Prosecco
+- **Trentino-Alto Adige**: Pinot Grigio, Gewürztraminer
+
+**Important Grapes**
+- Nebbiolo: Firm tannins, rose and tar aromas
+- Sangiovese: High acidity, cherry, herbs
+- Corvina: Base for Amarone and Valpolicella
+
+**SPAIN**
+
+**Classification System**
+- DOCa/DOQ: Qualified Designation of Origin (Rioja, Priorat)
+- DO: Designation of Origin
+- Vino de Pago: Single high-quality vineyard estates
+
+**Aging System**
+- Joven: No mandatory aging
+- Crianza: 2 years (6 months in oak)
+- Reserva: 3 years (1 year in oak)
+- Gran Reserva: 5 years (18 months in oak)
+
+**Main Regions**
+- **Rioja**: Tempranillo, classic style with American oak
+- **Ribera del Duero**: Powerful, modern Tempranillo
+- **Priorat**: Grenache and Carignan on slate, concentrated wines
+- **Rías Baixas**: Albariño, aromatic whites""",
+            "duration_minutes": 20
+        }
+    ]
+    
+    # Advanced Lessons
+    advanced_lessons = [
+        {
+            "lesson_id": "advanced_1", "track_id": "advanced", "order": 1,
+            "title_pt": "Comparação de Terroirs: Pinot Noir", "title_en": "Terroir Comparison: Pinot Noir",
+            "content_pt": """A Pinot Noir é a uva mais sensível ao terroir, tornando-a ideal para estudar como o lugar influencia o vinho.
+
+**Borgonha, França**
+- **Solo**: Calcário e argila
+- **Clima**: Continental frio
+- **Estilo**: Elegante, terroso, floral
+- **Aromas**: Cereja, framboesa, cogumelo, terra úmida
+- **Estrutura**: Taninos finos, acidez alta, corpo médio
+- **Envelhecimento**: 10-30+ anos (Grand Cru)
+
+**Oregon, EUA**
+- **Solo**: Vulcânico, sedimentar
+- **Clima**: Marítimo frio (similar à Borgonha)
+- **Estilo**: Frutado com terrosidade
+- **Aromas**: Frutas vermelhas, especiarias, terroso
+- **Estrutura**: Taninos médios, acidez média-alta
+- **Envelhecimento**: 5-15 anos
+
+**Califórnia (Sonoma Coast)**
+- **Solo**: Variado
+- **Clima**: Marítimo com neblina
+- **Estilo**: Mais rico e maduro
+- **Aromas**: Cereja preta, cola, especiarias
+- **Estrutura**: Corpo mais cheio, álcool mais alto
+- **Envelhecimento**: 5-12 anos
+
+**Marlborough, Nova Zelândia**
+- **Solo**: Aluvial, cascalho
+- **Clima**: Marítimo fresco
+- **Estilo**: Vibrante e expressivo
+- **Aromas**: Cereja, ameixa, herbal
+- **Estrutura**: Acidez alta, taninos sedosos
+- **Envelhecimento**: 5-10 anos
+
+**Análise Comparativa**
+Ao degustar Pinot Noir de diferentes regiões, observe:
+1. Cor: Borgonha tende a ser mais clara
+2. Nariz: Terroso vs frutado
+3. Paladar: Acidez, taninos, corpo
+4. Final: Mineralidade vs fruta""",
+            "content_en": """Pinot Noir is the most terroir-sensitive grape, making it ideal for studying how place influences wine.
+
+**Burgundy, France**
+- **Soil**: Limestone and clay
+- **Climate**: Cold continental
+- **Style**: Elegant, earthy, floral
+- **Aromas**: Cherry, raspberry, mushroom, wet earth
+- **Structure**: Fine tannins, high acidity, medium body
+- **Aging**: 10-30+ years (Grand Cru)
+
+**Oregon, USA**
+- **Soil**: Volcanic, sedimentary
+- **Climate**: Cold maritime (similar to Burgundy)
+- **Style**: Fruity with earthiness
+- **Aromas**: Red fruits, spices, earthy
+- **Structure**: Medium tannins, medium-high acidity
+- **Aging**: 5-15 years
+
+**California (Sonoma Coast)**
+- **Soil**: Varied
+- **Climate**: Maritime with fog
+- **Style**: Richer and riper
+- **Aromas**: Black cherry, cola, spices
+- **Structure**: Fuller body, higher alcohol
+- **Aging**: 5-12 years
+
+**Marlborough, New Zealand**
+- **Soil**: Alluvial, gravel
+- **Climate**: Cool maritime
+- **Style**: Vibrant and expressive
+- **Aromas**: Cherry, plum, herbal
+- **Structure**: High acidity, silky tannins
+- **Aging**: 5-10 years
+
+**Comparative Analysis**
+When tasting Pinot Noir from different regions, observe:
+1. Color: Burgundy tends to be lighter
+2. Nose: Earthy vs fruity
+3. Palate: Acidity, tannins, body
+4. Finish: Minerality vs fruit""",
+            "duration_minutes": 25
+        },
+        {
+            "lesson_id": "advanced_2", "track_id": "advanced", "order": 2,
+            "title_pt": "O Impacto das Decisões Humanas", "title_en": "The Impact of Human Decisions",
+            "content_pt": """Além do terroir, as escolhas do viticultor e enólogo definem o estilo final do vinho.
+
+**Decisões no Vinhedo**
+
+**Poda e Condução**
+- Guyot, Gobelet, Cordon: afetam vigor e exposição
+- Maior produtividade = menos concentração
+- Desfolha: expõe cachos ao sol
+
+**Irrigação**
+- Proibida em muitas regiões europeias
+- Comum no Novo Mundo
+- Déficit hídrico controlado: concentra sabores
+
+**Viticultura Orgânica e Biodinâmica**
+- Orgânica: Sem químicos sintéticos
+- Biodinâmica: Segue calendário lunar, preparados especiais
+- Natural: Mínima intervenção na adega
+
+**Decisões na Adega**
+
+**Leveduras**
+- Selvagens: Mais complexidade, risco de defeitos
+- Selecionadas: Consistência, aromas específicos
+
+**Maceração**
+- Curta: Vinhos leves, frutados
+- Longa: Mais extração, taninos, cor
+- A frio: Preserva aromas primários
+
+**Recipientes de Fermentação/Envelhecimento**
+- Inox: Neutralidade, frescor
+- Carvalho novo: Taninos, especiarias, baunilha
+- Carvalho usado: Oxigenação suave
+- Concreto: Textura sem sabores de madeira
+- Ânfora: Estilo ancestral, textural
+
+**Origem do Carvalho**
+- Francês: Mais sutil, especiarias finas
+- Americano: Mais agressivo, coco, baunilha
+- Húngaro, Esloveno: Intermediário
+
+**Clarificação e Filtração**
+- Filtrado: Mais limpo, menos complexo
+- Não filtrado: Mais textura, risco de instabilidade""",
+            "content_en": """Beyond terroir, winemaker choices define the wine's final style.
+
+**Vineyard Decisions**
+
+**Pruning and Training**
+- Guyot, Gobelet, Cordon: affect vigor and exposure
+- Higher yields = less concentration
+- Leaf pulling: exposes clusters to sun
+
+**Irrigation**
+- Prohibited in many European regions
+- Common in New World
+- Controlled water deficit: concentrates flavors
+
+**Organic and Biodynamic Viticulture**
+- Organic: No synthetic chemicals
+- Biodynamic: Follows lunar calendar, special preparations
+- Natural: Minimal intervention in winery
+
+**Winery Decisions**
+
+**Yeasts**
+- Wild: More complexity, risk of faults
+- Selected: Consistency, specific aromas
+
+**Maceration**
+- Short: Light, fruity wines
+- Long: More extraction, tannins, color
+- Cold: Preserves primary aromas
+
+**Fermentation/Aging Vessels**
+- Stainless: Neutrality, freshness
+- New oak: Tannins, spices, vanilla
+- Used oak: Gentle oxygenation
+- Concrete: Texture without wood flavors
+- Amphora: Ancestral style, textural
+
+**Oak Origin**
+- French: More subtle, fine spices
+- American: More aggressive, coconut, vanilla
+- Hungarian, Slovenian: Intermediate
+
+**Fining and Filtration**
+- Filtered: Cleaner, less complex
+- Unfiltered: More texture, risk of instability""",
+            "duration_minutes": 22
+        },
+        {
+            "lesson_id": "advanced_3", "track_id": "advanced", "order": 3,
+            "title_pt": "Envelhecimento e Evolução do Vinho", "title_en": "Aging and Wine Evolution",
+            "content_pt": """Entender como o vinho evolui é essencial para saber quando abrir suas garrafas.
+
+**O que acontece durante o envelhecimento?**
+
+**Reações Químicas**
+- Polimerização de taninos: Ficam mais suaves
+- Esterificação: Aromas mais complexos
+- Oxidação lenta: Mudança de cor e sabor
+- Precipitação: Formação de sedimentos
+
+**Fatores que afetam a longevidade**
+
+**Estrutura do Vinho**
+- Acidez: Alta acidez = maior longevidade
+- Taninos: Mais taninos = mais potencial
+- Álcool: Preserva, mas em excesso desequilibra
+- Açúcar residual: Atua como conservante
+
+**Condições de Armazenamento**
+- Temperatura: 12-14°C ideal, constante
+- Umidade: 70-80% para manter a rolha
+- Luz: Ausência de luz direta
+- Posição: Horizontal para rolhas naturais
+- Vibração: Evitar movimentos constantes
+
+**Curva de Evolução**
+
+**Fase de Desenvolvimento**
+- Vinho jovem, aromas primários
+- Taninos podem ser agressivos
+- Acidez pode parecer alta
+
+**Fase de Maturidade**
+- Integração de componentes
+- Aromas secundários e terciários
+- Taninos sedosos
+- Complexidade máxima
+
+**Fase de Declínio**
+- Perda de fruta
+- Aromas de oxidação (nozes, caramelo)
+- Acidez proeminente
+- Taninos secos
+
+**Potencial de Guarda por Estilo**
+- Beaujolais: 1-3 anos
+- Rioja Crianza: 5-10 anos
+- Bordeaux Cru Classé: 15-40+ anos
+- Borgonha Grand Cru: 15-50+ anos
+- Vintage Port: 40-100+ anos
+- Madeira: Virtualmente imortal""",
+            "content_en": """Understanding how wine evolves is essential to knowing when to open your bottles.
+
+**What happens during aging?**
+
+**Chemical Reactions**
+- Tannin polymerization: Become softer
+- Esterification: More complex aromas
+- Slow oxidation: Color and flavor changes
+- Precipitation: Sediment formation
+
+**Factors affecting longevity**
+
+**Wine Structure**
+- Acidity: High acidity = greater longevity
+- Tannins: More tannins = more potential
+- Alcohol: Preserves, but excess unbalances
+- Residual sugar: Acts as preservative
+
+**Storage Conditions**
+- Temperature: 12-14°C ideal, constant
+- Humidity: 70-80% to maintain cork
+- Light: No direct light
+- Position: Horizontal for natural corks
+- Vibration: Avoid constant movement
+
+**Evolution Curve**
+
+**Development Phase**
+- Young wine, primary aromas
+- Tannins may be aggressive
+- Acidity may seem high
+
+**Maturity Phase**
+- Component integration
+- Secondary and tertiary aromas
+- Silky tannins
+- Maximum complexity
+
+**Decline Phase**
+- Fruit loss
+- Oxidation aromas (nuts, caramel)
+- Prominent acidity
+- Dry tannins
+
+**Aging Potential by Style**
+- Beaujolais: 1-3 years
+- Rioja Crianza: 5-10 years
+- Bordeaux Cru Classé: 15-40+ years
+- Burgundy Grand Cru: 15-50+ years
+- Vintage Port: 40-100+ years
+- Madeira: Virtually immortal""",
+            "duration_minutes": 20
+        },
+        {
+            "lesson_id": "advanced_4", "track_id": "advanced", "order": 4,
+            "title_pt": "Tipicidade vs Inovação", "title_en": "Typicity vs Innovation",
+            "content_pt": """O debate entre tradição e modernidade define muito do mundo do vinho contemporâneo.
+
+**O Conceito de Tipicidade**
+
+Tipicidade refere-se às características esperadas de um vinho de determinada região:
+- Chianti deve ter acidez alta e sabor de cereja ácida
+- Borgonha tinta deve ser elegante, não potente
+- Barossa Shiraz deve ser encorpado e frutado
+
+**Argumentos pela Tradição**
+- Preserva identidade regional
+- Facilita reconhecimento pelo consumidor
+- Protege patrimônio cultural
+- Sistemas de denominação existem para isso
+
+**Movimentos Inovadores**
+
+**Super Toscanos (1970s)**
+- Usaram Cabernet em vez de Sangiovese
+- Ignoraram regras DOC
+- Hoje são alguns dos vinhos mais caros da Itália
+- Exemplo: Sassicaia, Tignanello, Ornellaia
+
+**Vinhos Naturais**
+- Mínima intervenção
+- Sem sulfitos adicionados
+- Leveduras nativas
+- Podem ser controversos (defeitos vs características)
+
+**Orange Wines**
+- Vinhos brancos com maceração prolongada
+- Tradição da Geórgia revivida
+- Cor âmbar, taninos, complexidade
+
+**Vinhos de Altitude**
+- Produção em altitudes extremas
+- Argentina (Salta), Chile (Elqui)
+- Novo estilo sendo definido
+
+**Questões para Reflexão**
+1. Deve um Chianti usar Cabernet Sauvignon?
+2. Vinhos naturais são "melhores" ou apenas diferentes?
+3. As denominações limitam a criatividade?
+4. Como equilibrar tradição e evolução?
+
+**O Caminho do Meio**
+Muitos produtores encontram equilíbrio:
+- Respeitam tradições mas experimentam
+- Fazem vinhos "de denominação" e "de garagem"
+- Inovam dentro dos limites do terroir""",
+            "content_en": """The debate between tradition and modernity defines much of contemporary wine.
+
+**The Concept of Typicity**
+
+Typicity refers to expected characteristics of a wine from a certain region:
+- Chianti should have high acidity and sour cherry flavor
+- Red Burgundy should be elegant, not powerful
+- Barossa Shiraz should be full-bodied and fruity
+
+**Arguments for Tradition**
+- Preserves regional identity
+- Facilitates consumer recognition
+- Protects cultural heritage
+- Denomination systems exist for this
+
+**Innovative Movements**
+
+**Super Tuscans (1970s)**
+- Used Cabernet instead of Sangiovese
+- Ignored DOC rules
+- Today are some of Italy's most expensive wines
+- Examples: Sassicaia, Tignanello, Ornellaia
+
+**Natural Wines**
+- Minimal intervention
+- No added sulfites
+- Native yeasts
+- Can be controversial (faults vs characteristics)
+
+**Orange Wines**
+- White wines with prolonged maceration
+- Georgian tradition revived
+- Amber color, tannins, complexity
+
+**High Altitude Wines**
+- Production at extreme altitudes
+- Argentina (Salta), Chile (Elqui)
+- New style being defined
+
+**Questions for Reflection**
+1. Should a Chianti use Cabernet Sauvignon?
+2. Are natural wines "better" or just different?
+3. Do denominations limit creativity?
+4. How to balance tradition and evolution?
+
+**The Middle Way**
+Many producers find balance:
+- Respect traditions but experiment
+- Make "denomination" and "garage" wines
+- Innovate within terroir limits""",
+            "duration_minutes": 18
+        }
+    ]
+    
+    # More quiz questions
+    new_quiz_questions = [
+        # Intermediate questions
+        {"question_id": "int_q1", "track_id": "intermediate", "question_type": "multiple_choice", "question_pt": "Qual componente do terroir é responsável pela drenagem e concentração de sabores em Bordeaux?", "question_en": "Which terroir component is responsible for drainage and flavor concentration in Bordeaux?", "options_pt": ["Argila", "Calcário", "Cascalho", "Xisto"], "options_en": ["Clay", "Limestone", "Gravel", "Schist"], "correct_answer": 2, "explanation_pt": "O cascalho (graves) em Bordeaux proporciona excelente drenagem, forçando as raízes a buscar água profundamente, resultando em vinhos mais concentrados.", "explanation_en": "Gravel (graves) in Bordeaux provides excellent drainage, forcing roots to seek water deeply, resulting in more concentrated wines."},
+        {"question_id": "int_q2", "track_id": "intermediate", "question_type": "multiple_choice", "question_pt": "Qual é a diferença principal entre a Margem Esquerda e a Margem Direita de Bordeaux?", "question_en": "What is the main difference between the Left Bank and Right Bank of Bordeaux?", "options_pt": ["Clima", "Uva dominante", "Altitude", "Método de vinificação"], "options_en": ["Climate", "Dominant grape", "Altitude", "Winemaking method"], "correct_answer": 1, "explanation_pt": "A Margem Esquerda é dominada por Cabernet Sauvignon (solos de cascalho), enquanto a Margem Direita é dominada por Merlot (solos de argila e calcário).", "explanation_en": "The Left Bank is dominated by Cabernet Sauvignon (gravel soils), while the Right Bank is dominated by Merlot (clay and limestone soils)."},
+        {"question_id": "int_q3", "track_id": "intermediate", "question_type": "multiple_choice", "question_pt": "O que é fermentação malolática?", "question_en": "What is malolactic fermentation?", "options_pt": ["Conversão de açúcar em álcool", "Conversão de ácido málico em ácido lático", "Fermentação em barrica", "Segunda fermentação para espumantes"], "options_en": ["Conversion of sugar to alcohol", "Conversion of malic acid to lactic acid", "Barrel fermentation", "Second fermentation for sparkling"], "correct_answer": 1, "explanation_pt": "A FML converte o ácido málico (agressivo, maçã verde) em ácido lático (suave, cremoso), reduzindo a acidez e adicionando textura.", "explanation_en": "MLF converts malic acid (aggressive, green apple) to lactic acid (soft, creamy), reducing acidity and adding texture."},
+        {"question_id": "int_q4", "track_id": "intermediate", "question_type": "multiple_choice", "question_pt": "Qual método de produção é usado para Champagne?", "question_en": "Which production method is used for Champagne?", "options_pt": ["Charmat", "Ancestral", "Tradicional (Champenoise)", "Transferência"], "options_en": ["Charmat", "Ancestral", "Traditional (Champenoise)", "Transfer"], "correct_answer": 2, "explanation_pt": "O Método Tradicional (Champenoise) envolve segunda fermentação na garrafa, envelhecimento sobre borras, remuage e dégorgement.", "explanation_en": "The Traditional Method (Champenoise) involves second fermentation in bottle, lees aging, riddling and disgorgement."},
+        {"question_id": "int_q5", "track_id": "intermediate", "question_type": "true_false", "question_pt": "Botrytis cinerea é um fungo prejudicial que sempre arruina as uvas.", "question_en": "Botrytis cinerea is a harmful fungus that always ruins grapes.", "options_pt": ["Verdadeiro", "Falso"], "options_en": ["True", "False"], "correct_answer": 1, "explanation_pt": "Sob condições específicas (manhãs úmidas, tardes secas), Botrytis se torna 'podridão nobre', concentrando açúcares e criando aromas únicos em vinhos como Sauternes e Tokaji.", "explanation_en": "Under specific conditions (humid mornings, dry afternoons), Botrytis becomes 'noble rot', concentrating sugars and creating unique aromas in wines like Sauternes and Tokaji."},
+        {"question_id": "int_q6", "track_id": "intermediate", "question_type": "multiple_choice", "question_pt": "Qual é a uva principal do Barolo?", "question_en": "What is the main grape of Barolo?", "options_pt": ["Sangiovese", "Nebbiolo", "Corvina", "Aglianico"], "options_en": ["Sangiovese", "Nebbiolo", "Corvina", "Aglianico"], "correct_answer": 1, "explanation_pt": "Barolo é feito 100% de Nebbiolo, uma uva com taninos firmes, acidez alta e aromas característicos de rosa, alcatrão e cereja.", "explanation_en": "Barolo is made 100% from Nebbiolo, a grape with firm tannins, high acidity and characteristic aromas of rose, tar and cherry."},
+        
+        # Advanced questions
+        {"question_id": "adv_q1", "track_id": "advanced", "question_type": "multiple_choice", "question_pt": "Por que a Pinot Noir é considerada a uva mais sensível ao terroir?", "question_en": "Why is Pinot Noir considered the most terroir-sensitive grape?", "options_pt": ["Produz mais álcool", "Casca fina expressa nuances do solo", "É mais resistente a doenças", "Amadurece mais rápido"], "options_en": ["Produces more alcohol", "Thin skin expresses soil nuances", "More disease resistant", "Ripens faster"], "correct_answer": 1, "explanation_pt": "A casca fina da Pinot Noir oferece menos 'filtro' entre o terroir e o vinho, permitindo que características sutis do solo e clima se expressem.", "explanation_en": "Pinot Noir's thin skin offers less 'filter' between terroir and wine, allowing subtle soil and climate characteristics to express themselves."},
+        {"question_id": "adv_q2", "track_id": "advanced", "question_type": "multiple_choice", "question_pt": "O que são os 'Super Toscanos'?", "question_en": "What are 'Super Tuscans'?", "options_pt": ["Vinhos DOC de alta qualidade", "Vinhos que usam uvas não tradicionais da Toscana", "Vinhos biodinâmicos", "Vinhos de colheita tardia"], "options_en": ["High quality DOC wines", "Wines using non-traditional Tuscan grapes", "Biodynamic wines", "Late harvest wines"], "correct_answer": 1, "explanation_pt": "Super Toscanos são vinhos que usam Cabernet Sauvignon, Merlot ou outras uvas internacionais, desafiando as regras tradicionais do DOC toscano.", "explanation_en": "Super Tuscans are wines using Cabernet Sauvignon, Merlot or other international grapes, defying traditional Tuscan DOC rules."},
+        {"question_id": "adv_q3", "track_id": "advanced", "question_type": "multiple_choice", "question_pt": "Durante o envelhecimento, o que acontece com os taninos?", "question_en": "During aging, what happens to tannins?", "options_pt": ["Aumentam", "Polimerizam e ficam mais suaves", "Desaparecem completamente", "Tornam-se mais agressivos"], "options_en": ["Increase", "Polymerize and become softer", "Disappear completely", "Become more aggressive"], "correct_answer": 1, "explanation_pt": "Os taninos se polimerizam (juntam-se em cadeias maiores) durante o envelhecimento, tornando-se mais suaves e aveludados na textura.", "explanation_en": "Tannins polymerize (join into larger chains) during aging, becoming softer and more velvety in texture."},
+        {"question_id": "adv_q4", "track_id": "advanced", "question_type": "true_false", "question_pt": "Vinhos com maior acidez geralmente têm maior potencial de envelhecimento.", "question_en": "Wines with higher acidity generally have greater aging potential.", "options_pt": ["Verdadeiro", "Falso"], "options_en": ["True", "False"], "correct_answer": 0, "explanation_pt": "A acidez atua como conservante natural no vinho. Vinhos com acidez alta, como Riesling e Borgonha, podem envelhecer por décadas.", "explanation_en": "Acidity acts as a natural preservative in wine. High-acid wines like Riesling and Burgundy can age for decades."},
+    ]
+    
+    # Insert all new content
+    await db.lessons.insert_many(intermediate_lessons + advanced_lessons)
+    await db.quiz_questions.insert_many(new_quiz_questions)
+    
+    # Update study track lesson counts
+    await db.study_tracks.update_one({"track_id": "intermediate"}, {"$set": {"lessons_count": 8}})
+    await db.study_tracks.update_one({"track_id": "advanced"}, {"$set": {"lessons_count": 4}})
+    
+    return {
+        "message": "Content expanded successfully",
+        "new_lessons": len(intermediate_lessons) + len(advanced_lessons),
+        "new_questions": len(new_quiz_questions)
+    }
+
 # Include router
 app.include_router(api_router)
 
