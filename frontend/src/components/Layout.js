@@ -225,7 +225,7 @@ export const Navbar = () => {
 };
 
 export const Footer = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   return (
     <footer className="border-t border-border/40 bg-muted/30 py-12 mt-auto">
@@ -240,13 +240,17 @@ export const Footer = () => {
               <span className="font-serif text-lg font-bold">WineStudy</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Sua plataforma completa para aprender sobre vinhos.
+              {language === 'pt' 
+                ? 'Sua plataforma completa para aprender sobre vinhos.'
+                : 'Your complete platform for learning about wines.'}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h4 className="font-semibold mb-4">Navegação</h4>
+            <h4 className="font-semibold mb-4">
+              {language === 'pt' ? 'Navegação' : 'Navigation'}
+            </h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="/atlas" className="hover:text-foreground">{t('nav.atlas')}</Link></li>
               <li><Link to="/grapes" className="hover:text-foreground">{t('nav.grapes')}</Link></li>
@@ -257,29 +261,33 @@ export const Footer = () => {
 
           {/* Study */}
           <div>
-            <h4 className="font-semibold mb-4">Estudar</h4>
+            <h4 className="font-semibold mb-4">
+              {language === 'pt' ? 'Estudar' : 'Study'}
+            </h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/study/basic" className="hover:text-foreground">Básico</Link></li>
-              <li><Link to="/study/intermediate" className="hover:text-foreground">Intermediário</Link></li>
-              <li><Link to="/study/advanced" className="hover:text-foreground">Avançado</Link></li>
+              <li><Link to="/study/basic" className="hover:text-foreground">{t('study.basic')}</Link></li>
+              <li><Link to="/study/intermediate" className="hover:text-foreground">{t('study.intermediate')}</Link></li>
+              <li><Link to="/study/advanced" className="hover:text-foreground">{t('study.advanced')}</Link></li>
               <li><Link to="/quiz" className="hover:text-foreground">Quiz</Link></li>
             </ul>
           </div>
 
           {/* Resources */}
           <div>
-            <h4 className="font-semibold mb-4">Recursos</h4>
+            <h4 className="font-semibold mb-4">
+              {language === 'pt' ? 'Recursos' : 'Resources'}
+            </h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><span className="cursor-pointer hover:text-foreground">WSET SAT</span></li>
-              <li><span className="cursor-pointer hover:text-foreground">Glossário</span></li>
-              <li><span className="cursor-pointer hover:text-foreground">Harmonização</span></li>
+              <li><span className="cursor-pointer hover:text-foreground">{language === 'pt' ? 'Glossário' : 'Glossary'}</span></li>
+              <li><span className="cursor-pointer hover:text-foreground">{language === 'pt' ? 'Harmonização' : 'Food Pairing'}</span></li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-6 border-t border-border/40 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} WineStudy. Todos os direitos reservados.
+            © {new Date().getFullYear()} WineStudy. {language === 'pt' ? 'Todos os direitos reservados.' : 'All rights reserved.'}
           </p>
           <p className="text-sm text-muted-foreground font-accent italic">
             "In vino veritas"
