@@ -111,10 +111,12 @@ const LessonPage = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-muted-foreground">Lição não encontrada</p>
+          <p className="text-muted-foreground">
+            {language === 'pt' ? 'Lição não encontrada' : 'Lesson not found'}
+          </p>
           <Link to="/study">
             <Button variant="link" className="text-wine-500 mt-2">
-              Voltar para estudos
+              {t('quiz.backToStudy')}
             </Button>
           </Link>
         </div>
