@@ -7,7 +7,7 @@ import requests
 import os
 from datetime import datetime
 
-BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://winestudy.preview.emergentagent.com')
+BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://vinhoestudo.preview.emergentagent.com')
 
 # Test session token (created in MongoDB)
 TEST_SESSION_TOKEN = "test_session_1768929554305"
