@@ -23,8 +23,13 @@ const FeatureCard = ({ icon: Icon, title, description, delay }) => (
 );
 
 const LandingPage = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { isAuthenticated } = useAuth();
+
+  // Country labels with translations
+  const countries = language === 'pt' 
+    ? ['🇫🇷 França', '🇮🇹 Itália', '🇪🇸 Espanha', '🇵🇹 Portugal', '🇺🇸 EUA', '🇦🇷 Argentina']
+    : ['🇫🇷 France', '🇮🇹 Italy', '🇪🇸 Spain', '🇵🇹 Portugal', '🇺🇸 USA', '🇦🇷 Argentina'];
 
   return (
     <div className="min-h-screen">
@@ -48,7 +53,9 @@ const LandingPage = () => {
           >
             <div className="inline-flex items-center gap-2 bg-wine-500/10 border border-wine-500/20 rounded-full px-4 py-2 mb-8">
               <Sparkles className="w-4 h-4 text-wine-500" />
-              <span className="text-sm text-wine-600 dark:text-wine-400 font-medium">WSET Systematic Approach</span>
+              <span className="text-sm text-wine-600 dark:text-wine-400 font-medium">
+                {language === 'pt' ? 'Sistemática WSET' : 'WSET Systematic Approach'}
+              </span>
             </div>
             
             <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-foreground">
@@ -109,10 +116,10 @@ const LandingPage = () => {
             className="text-center mb-16"
           >
             <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-4">
-              {t('landing.features.atlas.title').split(' ')[0]} <span className="text-wine-500">Wine</span>
+              {t('landing.features.sectionTitle')} <span className="text-wine-500">Wine</span>
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Tudo que você precisa para se tornar um expert em vinhos
+              {t('landing.features.sectionSubtitle')}
             </p>
           </motion.div>
 
@@ -156,17 +163,16 @@ const LandingPage = () => {
               transition={{ duration: 0.6 }}
             >
               <span className="text-wine-500 font-serif text-sm tracking-wider uppercase mb-4 block">
-                {t('atlas.oldWorld')} & {t('atlas.newWorld')}
+                {t('landing.world.sectionLabel')}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-6">
-                Explore Vinhedos de Todo o Mundo
+                {t('landing.world.title')}
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                Da tradição milenar do Velho Mundo às inovações do Novo Mundo. 
-                Descubra terroir, clima, castas e estilos de cada região vinícola.
+                {t('landing.world.description')}
               </p>
               <div className="flex flex-wrap gap-3">
-                {['🇫🇷 França', '🇮🇹 Itália', '🇪🇸 Espanha', '🇵🇹 Portugal', '🇺🇸 EUA', '🇦🇷 Argentina'].map((country) => (
+                {countries.map((country) => (
                   <span 
                     key={country}
                     className="px-4 py-2 bg-paper-200 dark:bg-paper-800 rounded-sm text-sm"
@@ -187,7 +193,7 @@ const LandingPage = () => {
               <div className="aspect-[4/3] rounded-sm overflow-hidden shadow-soft">
                 <img 
                   src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?crop=entropy&cs=srgb&fm=jpg&q=85"
-                  alt="Vineyard"
+                  alt={language === 'pt' ? 'Vinhedo' : 'Vineyard'}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -197,8 +203,8 @@ const LandingPage = () => {
                     <Wine className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-semibold">+200 Castas</p>
-                    <p className="text-sm text-muted-foreground">Catalogadas</p>
+                    <p className="font-semibold">+80 {t('landing.world.grapesCount')}</p>
+                    <p className="text-sm text-muted-foreground">{t('landing.world.cataloged')}</p>
                   </div>
                 </div>
               </div>
@@ -216,17 +222,17 @@ const LandingPage = () => {
             viewport={{ once: true }}
           >
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-6">
-              Comece Sua Jornada Hoje
+              {t('landing.cta.title')}
             </h2>
             <p className="text-wine-100 text-lg mb-10 max-w-xl mx-auto">
-              Junte-se a milhares de entusiastas que estão aprendendo sobre vinhos de forma estruturada e prazerosa.
+              {t('landing.cta.description')}
             </p>
             <Link to={isAuthenticated ? "/dashboard" : "/register"}>
               <Button 
                 data-testid="cta-section-button"
                 className="bg-white hover:bg-paper-100 text-wine-600 rounded-sm px-10 py-6 text-base font-serif tracking-wide"
               >
-                Criar Conta Gratuita
+                {t('landing.cta.button')}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
