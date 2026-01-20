@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   Wine, Globe, GlassWater, BookOpen, Menu, X, 
-  User, LogOut, Moon, Sun, Languages
+  User, LogOut, Moon, Sun, Languages, Factory
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { 
