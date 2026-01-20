@@ -258,28 +258,28 @@ const DashboardPage = () => {
             <QuickActionCard
               icon={Plus}
               title={t('dashboard.newTasting')}
-              description="Registre uma nova degustação"
+              description={language === 'pt' ? 'Registre uma nova degustação' : 'Record a new tasting'}
               to="/tasting/new"
               delay={0.7}
             />
             <QuickActionCard
               icon={GlassWater}
               title={t('dashboard.exploreGrapes')}
-              description="Descubra novas castas"
+              description={language === 'pt' ? 'Descubra novas castas' : 'Discover new grapes'}
               to="/grapes"
               delay={0.8}
             />
             <QuickActionCard
               icon={Globe}
-              title="Explorar Atlas"
-              description="Navegue pelas regiões"
+              title={language === 'pt' ? 'Explorar Atlas' : 'Explore Atlas'}
+              description={language === 'pt' ? 'Navegue pelas regiões' : 'Browse wine regions'}
               to="/atlas"
               delay={0.9}
             />
             <QuickActionCard
               icon={Brain}
               title={t('dashboard.takeQuiz')}
-              description="Teste seus conhecimentos"
+              description={language === 'pt' ? 'Teste seus conhecimentos' : 'Test your knowledge'}
               to="/quiz"
               delay={1.0}
             />
