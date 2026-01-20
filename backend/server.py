@@ -2030,6 +2030,622 @@ async def seed_complete_grapes():
         "countries": list(set(g["origin_country"] for g in COMPLETE_GRAPES))
     }
 
+
+@api_router.post("/seed/expand-advanced")
+async def expand_advanced_content():
+    """Add more advanced study content"""
+    
+    # Check if already expanded
+    advanced_count = await db.lessons.count_documents({"track_id": "advanced"})
+    if advanced_count >= 10:
+        return {"message": "Advanced content already expanded", "lesson_count": advanced_count}
+    
+    new_advanced_lessons = [
+        {
+            "lesson_id": "advanced_5", "track_id": "advanced", "order": 5,
+            "title_pt": "Análise Sensorial Avançada", "title_en": "Advanced Sensory Analysis",
+            "content_pt": """A análise sensorial profissional vai além da degustação casual, utilizando metodologias estruturadas.
+
+**Sistemática de Degustação**
+
+A metodologia WSET (Wine & Spirit Education Trust) é o padrão internacional:
+
+**1. Aparência**
+- Intensidade: pálido, médio, profundo
+- Cor: núcleo e borda (indica idade)
+- Limpidez e viscosidade
+
+**2. Nariz**
+- Condição: limpo ou com defeitos
+- Intensidade aromática
+- Características: frutadas, florais, herbáceas, especiarias, carvalho, terciárias
+
+**3. Paladar**
+- Doçura: seco a doce
+- Acidez: baixa a alta
+- Tanino (tintos): baixo a alto
+- Corpo: leve a encorpado
+- Intensidade de sabor
+- Final: curto a longo
+
+**4. Conclusão**
+- Qualidade (BLIC: defeituoso, aceitável, bom, muito bom, excepcional)
+- Potencial de guarda
+- Estado de maturação
+
+**Defeitos Comuns**
+
+- **TCA (rolha)**: Mofo, papelão molhado
+- **Brettanomyces**: Curral, band-aid
+- **Oxidação**: Maçã podre, xerez (em não fortificados)
+- **Redução**: Ovo podre, borracha queimada
+- **Acidez volátil**: Vinagre, esmalte""",
+            "content_en": """Professional sensory analysis goes beyond casual tasting, using structured methodologies.
+
+**Tasting Systematic**
+
+The WSET (Wine & Spirit Education Trust) methodology is the international standard:
+
+**1. Appearance**
+- Intensity: pale, medium, deep
+- Color: core and rim (indicates age)
+- Clarity and viscosity
+
+**2. Nose**
+- Condition: clean or faulty
+- Aromatic intensity
+- Characteristics: fruity, floral, herbaceous, spices, oak, tertiary
+
+**3. Palate**
+- Sweetness: dry to sweet
+- Acidity: low to high
+- Tannin (reds): low to high
+- Body: light to full
+- Flavor intensity
+- Finish: short to long
+
+**4. Conclusion**
+- Quality (BLIC: faulty, acceptable, good, very good, outstanding)
+- Aging potential
+- Readiness
+
+**Common Faults**
+
+- **TCA (cork taint)**: Mold, wet cardboard
+- **Brettanomyces**: Barnyard, band-aid
+- **Oxidation**: Rotten apple, sherry (in non-fortified)
+- **Reduction**: Rotten egg, burnt rubber
+- **Volatile acidity**: Vinegar, nail polish""",
+            "duration_minutes": 25
+        },
+        {
+            "lesson_id": "advanced_6", "track_id": "advanced", "order": 6,
+            "title_pt": "Grandes Vinhos da Itália", "title_en": "Great Wines of Italy",
+            "content_pt": """A Itália é o maior produtor de vinho do mundo, com uma diversidade incomparável de uvas autóctones.
+
+**Os 4 Grandes (DOCG Mais Prestigiosos)**
+
+**1. Barolo e Barbaresco (Piemonte)**
+- Uva: Nebbiolo
+- Estilo: Taninos firmes, acidez alta, cor clara
+- Aromas: Rosa, alcatrão, cereja, trufa
+- Guarda: 15-40+ anos para Barolo
+- Diferença: Barolo mais potente, Barbaresco mais elegante
+
+**2. Brunello di Montalcino (Toscana)**
+- Uva: Sangiovese Grosso (clone local)
+- Estilo: Encorpado, tânico, complexo
+- Aromas: Cereja ácida, couro, tabaco, terra
+- Envelhecimento: Mínimo 5 anos (2 em carvalho)
+- Guarda: 10-30+ anos
+
+**3. Amarone della Valpolicella (Vêneto)**
+- Uvas: Corvina, Rondinella, Molinara
+- Método: Appassimento (uvas secas por 3-4 meses)
+- Estilo: Rico, potente, levemente doce
+- Álcool: 15-17%
+- Aromas: Cereja seca, chocolate, café, especiarias
+
+**Super Toscanos**
+
+Movimento dos anos 1970 que desafiou as regras DOC:
+- Uso de Cabernet Sauvignon e Merlot
+- Exemplos: Sassicaia, Ornellaia, Tignanello
+- Hoje são alguns dos vinhos mais caros da Itália
+
+**Outras Regiões Importantes**
+- Chianti Classico (Sangiovese)
+- Bolgheri (blends bordaleses)
+- Etna (Nerello Mascalese)
+- Taurasi (Aglianico)""",
+            "content_en": """Italy is the world's largest wine producer, with an unparalleled diversity of indigenous grapes.
+
+**The Big 4 (Most Prestigious DOCGs)**
+
+**1. Barolo and Barbaresco (Piedmont)**
+- Grape: Nebbiolo
+- Style: Firm tannins, high acidity, light color
+- Aromas: Rose, tar, cherry, truffle
+- Aging: 15-40+ years for Barolo
+- Difference: Barolo more powerful, Barbaresco more elegant
+
+**2. Brunello di Montalcino (Tuscany)**
+- Grape: Sangiovese Grosso (local clone)
+- Style: Full-bodied, tannic, complex
+- Aromas: Sour cherry, leather, tobacco, earth
+- Aging: Minimum 5 years (2 in oak)
+- Cellaring: 10-30+ years
+
+**3. Amarone della Valpolicella (Veneto)**
+- Grapes: Corvina, Rondinella, Molinara
+- Method: Appassimento (grapes dried for 3-4 months)
+- Style: Rich, powerful, slightly sweet
+- Alcohol: 15-17%
+- Aromas: Dried cherry, chocolate, coffee, spices
+
+**Super Tuscans**
+
+1970s movement that challenged DOC rules:
+- Use of Cabernet Sauvignon and Merlot
+- Examples: Sassicaia, Ornellaia, Tignanello
+- Today among Italy's most expensive wines
+
+**Other Important Regions**
+- Chianti Classico (Sangiovese)
+- Bolgheri (Bordeaux blends)
+- Etna (Nerello Mascalese)
+- Taurasi (Aglianico)""",
+            "duration_minutes": 22
+        },
+        {
+            "lesson_id": "advanced_7", "track_id": "advanced", "order": 7,
+            "title_pt": "Grandes Vinhos da Espanha", "title_en": "Great Wines of Spain",
+            "content_pt": """A Espanha possui a maior área plantada de vinhedos do mundo e uma rica tradição vinícola.
+
+**Rioja: O Clássico**
+
+Sistema de classificação único baseado em tempo de envelhecimento:
+- **Joven**: Pouco ou nenhum carvalho
+- **Crianza**: 2 anos (1 em barrica)
+- **Reserva**: 3 anos (1 em barrica)
+- **Gran Reserva**: 5 anos (2 em barrica)
+
+Uva principal: Tempranillo
+Sub-regiões: Alta (altitude, elegância), Alavesa (vales), Oriental (calor, potência)
+
+**Ribera del Duero**
+
+- Clima extremo: Frio intenso, verões quentes
+- Uva: Tempranillo (localmente "Tinto Fino")
+- Estilo: Mais potente que Rioja, frutas negras
+- Grandes produtores: Vega Sicilia, Pingus, Pesquera
+
+**Priorat**
+
+- Região renascentista nos anos 1980
+- Solos de licorella (xisto)
+- Uvas: Garnacha, Carignan (Cariñena)
+- Estilo: Concentrado, mineral, álcool alto
+- DOCa status (junto com Rioja)
+
+**Jerez (Sherry)**
+
+Vinhos fortificados únicos com sistema de solera:
+- **Fino/Manzanilla**: Sob flor, seco, leve
+- **Amontillado**: Biológico depois oxidativo
+- **Oloroso**: Oxidativo, encorpado
+- **Pedro Ximénez**: Doce, viscoso
+
+**Cava**
+
+Espumante método tradicional da Catalunha:
+- Uvas: Macabeo, Parellada, Xarel·lo
+- Alternativa acessível ao Champagne""",
+            "content_en": """Spain has the largest vineyard area in the world and a rich winemaking tradition.
+
+**Rioja: The Classic**
+
+Unique classification system based on aging time:
+- **Joven**: Little or no oak
+- **Crianza**: 2 years (1 in barrel)
+- **Reserva**: 3 years (1 in barrel)
+- **Gran Reserva**: 5 years (2 in barrel)
+
+Main grape: Tempranillo
+Sub-regions: Alta (altitude, elegance), Alavesa (valleys), Oriental (heat, power)
+
+**Ribera del Duero**
+
+- Extreme climate: Intense cold, hot summers
+- Grape: Tempranillo (locally "Tinto Fino")
+- Style: More powerful than Rioja, black fruits
+- Great producers: Vega Sicilia, Pingus, Pesquera
+
+**Priorat**
+
+- Renaissance region in the 1980s
+- Licorella soils (schist)
+- Grapes: Garnacha, Carignan (Cariñena)
+- Style: Concentrated, mineral, high alcohol
+- DOCa status (along with Rioja)
+
+**Jerez (Sherry)**
+
+Unique fortified wines with solera system:
+- **Fino/Manzanilla**: Under flor, dry, light
+- **Amontillado**: Biological then oxidative
+- **Oloroso**: Oxidative, full-bodied
+- **Pedro Ximénez**: Sweet, viscous
+
+**Cava**
+
+Traditional method sparkling from Catalonia:
+- Grapes: Macabeo, Parellada, Xarel·lo
+- Affordable Champagne alternative""",
+            "duration_minutes": 20
+        },
+        {
+            "lesson_id": "advanced_8", "track_id": "advanced", "order": 8,
+            "title_pt": "Vinhos do Novo Mundo", "title_en": "New World Wines",
+            "content_pt": """O Novo Mundo revolucionou a indústria vinícola com inovação e qualidade.
+
+**Estados Unidos (Califórnia)**
+
+**Napa Valley**
+- Região mais prestigiosa dos EUA
+- Especialidade: Cabernet Sauvignon
+- Sub-AVAs: Oakville, Rutherford, Stags Leap
+- Estilo: Encorpado, frutado, carvalho novo
+
+**Sonoma**
+- Mais diversa que Napa
+- Pinot Noir e Chardonnay (Russian River, Sonoma Coast)
+- Zinfandel (Dry Creek Valley)
+
+**Oregon**
+- Clima frio, foco em Pinot Noir
+- Willamette Valley: Borgonha americana
+
+**Argentina**
+
+- Altitude extrema (até 3.000m)
+- Uva emblemática: Malbec
+- Mendoza: 70% da produção
+- Salta: Vinhos de altitude, Torrontés
+
+**Chile**
+
+- Condições ideais (seco, sem filoxera)
+- Cabernet Sauvignon: Maipo Valley
+- Carménère: Uva emblemática
+- Vinhos costeiros: Casablanca, Leyda
+
+**Austrália**
+
+- Shiraz: Barossa Valley (potente)
+- Cabernet: Coonawarra (terroso)
+- Riesling: Clare e Eden Valley
+- Sistema de indicação geográfica (GI)
+
+**Nova Zelândia**
+
+- Sauvignon Blanc: Marlborough (intenso)
+- Pinot Noir: Central Otago, Martinborough
+- Clima marítimo fresco
+
+**África do Sul**
+
+- Pinotage: cruzamento único
+- Chenin Blanc: uva mais plantada
+- Stellenbosch: região clássica""",
+            "content_en": """The New World revolutionized the wine industry with innovation and quality.
+
+**United States (California)**
+
+**Napa Valley**
+- Most prestigious US region
+- Specialty: Cabernet Sauvignon
+- Sub-AVAs: Oakville, Rutherford, Stags Leap
+- Style: Full-bodied, fruity, new oak
+
+**Sonoma**
+- More diverse than Napa
+- Pinot Noir and Chardonnay (Russian River, Sonoma Coast)
+- Zinfandel (Dry Creek Valley)
+
+**Oregon**
+- Cool climate, Pinot Noir focus
+- Willamette Valley: American Burgundy
+
+**Argentina**
+
+- Extreme altitude (up to 3,000m)
+- Emblematic grape: Malbec
+- Mendoza: 70% of production
+- Salta: Altitude wines, Torrontés
+
+**Chile**
+
+- Ideal conditions (dry, no phylloxera)
+- Cabernet Sauvignon: Maipo Valley
+- Carménère: Emblematic grape
+- Coastal wines: Casablanca, Leyda
+
+**Australia**
+
+- Shiraz: Barossa Valley (powerful)
+- Cabernet: Coonawarra (earthy)
+- Riesling: Clare and Eden Valley
+- Geographical Indication (GI) system
+
+**New Zealand**
+
+- Sauvignon Blanc: Marlborough (intense)
+- Pinot Noir: Central Otago, Martinborough
+- Cool maritime climate
+
+**South Africa**
+
+- Pinotage: unique cross
+- Chenin Blanc: most planted grape
+- Stellenbosch: classic region""",
+            "duration_minutes": 22
+        },
+        {
+            "lesson_id": "advanced_9", "track_id": "advanced", "order": 9,
+            "title_pt": "Harmonização Avançada", "title_en": "Advanced Food Pairing",
+            "content_pt": """A harmonização avançada vai além de "tinto com carne, branco com peixe".
+
+**Princípios Fundamentais**
+
+**1. Peso e Intensidade**
+- Pratos leves → vinhos leves
+- Pratos intensos → vinhos potentes
+- Exceção: contraste intencional
+
+**2. Interação de Sabores**
+- Acidez do vinho corta gordura
+- Tanino combina com proteína
+- Doçura equilibra picante
+
+**3. Componentes Problemáticos**
+- Alcachofra: contém cinarina (altera sabor)
+- Aspargos: compostos sulfurosos
+- Vinagrete: acidez compete com vinho
+- Pimenta intensa: ressalta álcool
+
+**Harmonizações Clássicas**
+
+**Queijos**
+- Brie/Camembert → Champagne, Chardonnay
+- Roquefort → Sauternes, Porto
+- Parmesão → Barolo, Chianti
+- Cabra → Sancerre, Sauvignon Blanc
+
+**Carnes**
+- Cordeiro → Rioja, Bordeaux
+- Vitela → Pinot Noir, Barbera
+- Porco → Riesling, Chenin Blanc
+- Pato → Pinot Noir, Côtes du Rhône
+
+**Frutos do Mar**
+- Ostras → Chablis, Muscadet
+- Salmão → Pinot Noir leve, Rosé
+- Lagosta → Champagne, Borgonha branco
+- Atum grelhado → Tintos leves
+
+**Harmonização Regional**
+O princípio mais seguro: vinhos e comidas da mesma região evoluíram juntos
+- Chianti + massa com molho de tomate
+- Albariño + frutos do mar galegos
+- Gewürztraminer + choucroute alsaciana""",
+            "content_en": """Advanced pairing goes beyond "red with meat, white with fish".
+
+**Fundamental Principles**
+
+**1. Weight and Intensity**
+- Light dishes → light wines
+- Intense dishes → powerful wines
+- Exception: intentional contrast
+
+**2. Flavor Interaction**
+- Wine acidity cuts fat
+- Tannin pairs with protein
+- Sweetness balances spicy
+
+**3. Problematic Components**
+- Artichoke: contains cynarin (alters taste)
+- Asparagus: sulfur compounds
+- Vinaigrette: acidity competes with wine
+- Intense spice: highlights alcohol
+
+**Classic Pairings**
+
+**Cheeses**
+- Brie/Camembert → Champagne, Chardonnay
+- Roquefort → Sauternes, Port
+- Parmesan → Barolo, Chianti
+- Goat → Sancerre, Sauvignon Blanc
+
+**Meats**
+- Lamb → Rioja, Bordeaux
+- Veal → Pinot Noir, Barbera
+- Pork → Riesling, Chenin Blanc
+- Duck → Pinot Noir, Côtes du Rhône
+
+**Seafood**
+- Oysters → Chablis, Muscadet
+- Salmon → Light Pinot Noir, Rosé
+- Lobster → Champagne, White Burgundy
+- Grilled tuna → Light reds
+
+**Regional Pairing**
+The safest principle: wines and foods from the same region evolved together
+- Chianti + pasta with tomato sauce
+- Albariño + Galician seafood
+- Gewürztraminer + Alsatian choucroute""",
+            "duration_minutes": 20
+        },
+        {
+            "lesson_id": "advanced_10", "track_id": "advanced", "order": 10,
+            "title_pt": "Serviço e Armazenamento", "title_en": "Service and Storage",
+            "content_pt": """O serviço correto pode transformar a experiência de um vinho.
+
+**Temperatura de Serviço**
+
+A temperatura errada é o erro mais comum:
+
+**Vinhos Brancos e Rosés**
+- Espumantes: 6-8°C
+- Brancos leves (Vinho Verde): 8-10°C
+- Brancos encorpados (Borgonha): 10-12°C
+- Rosés: 10-12°C
+
+**Vinhos Tintos**
+- Leves (Beaujolais): 12-14°C
+- Médios (Pinot Noir): 14-16°C
+- Encorpados (Bordeaux, Barolo): 16-18°C
+
+*"Temperatura ambiente" é um mito - veio de castelos sem aquecimento!*
+
+**Decantação**
+
+**Quando decantar:**
+- Vinhos jovens potentes: aerar 1-2 horas
+- Vinhos velhos com sedimento: decantar cuidadosamente
+- Tintos tânicos fechados
+
+**Quando NÃO decantar:**
+- Brancos delicados
+- Espumantes (perde gás)
+- Vinhos muito velhos e frágeis
+
+**Ordem de Serviço**
+1. Espumantes primeiro
+2. Brancos antes de tintos
+3. Leves antes de encorpados
+4. Secos antes de doces
+5. Jovens antes de velhos
+
+**Armazenamento**
+
+**Condições ideais:**
+- Temperatura: 12-14°C constante
+- Umidade: 70-75%
+- Escuro (luz UV degrada)
+- Sem vibração
+- Sem odores fortes
+- Garrafas deitadas (para rolha)
+
+**Quanto tempo guardar:**
+- A maioria dos vinhos: beber em 2-3 anos
+- Apenas 1-5% dos vinhos melhora com guarda
+- Grandes tintos e doces: 10-50+ anos""",
+            "content_en": """Proper service can transform a wine experience.
+
+**Serving Temperature**
+
+Wrong temperature is the most common mistake:
+
+**White and Rosé Wines**
+- Sparkling: 6-8°C
+- Light whites (Vinho Verde): 8-10°C
+- Full-bodied whites (Burgundy): 10-12°C
+- Rosés: 10-12°C
+
+**Red Wines**
+- Light (Beaujolais): 12-14°C
+- Medium (Pinot Noir): 14-16°C
+- Full-bodied (Bordeaux, Barolo): 16-18°C
+
+*"Room temperature" is a myth - it came from unheated castles!*
+
+**Decanting**
+
+**When to decant:**
+- Young powerful wines: aerate 1-2 hours
+- Old wines with sediment: decant carefully
+- Closed tannic reds
+
+**When NOT to decant:**
+- Delicate whites
+- Sparkling (loses fizz)
+- Very old fragile wines
+
+**Service Order**
+1. Sparkling first
+2. Whites before reds
+3. Light before full-bodied
+4. Dry before sweet
+5. Young before old
+
+**Storage**
+
+**Ideal conditions:**
+- Temperature: 12-14°C constant
+- Humidity: 70-75%
+- Dark (UV light degrades)
+- No vibration
+- No strong odors
+- Bottles lying down (for cork)
+
+**How long to keep:**
+- Most wines: drink within 2-3 years
+- Only 1-5% of wines improve with age
+- Great reds and sweets: 10-50+ years""",
+            "duration_minutes": 18
+        }
+    ]
+    
+    # Additional quiz questions for advanced content
+    new_advanced_questions = [
+        {"question_id": "adv_q5", "track_id": "advanced", "question_type": "multiple_choice", 
+         "question_pt": "Qual é a temperatura ideal para servir um Bordeaux tinto encorpado?",
+         "question_en": "What is the ideal serving temperature for a full-bodied red Bordeaux?",
+         "options_pt": ["6-8°C", "10-12°C", "16-18°C", "20-22°C"],
+         "options_en": ["6-8°C", "10-12°C", "16-18°C", "20-22°C"],
+         "correct_answer": 2,
+         "explanation_pt": "Vinhos tintos encorpados devem ser servidos entre 16-18°C. 'Temperatura ambiente' é um mito de castelos sem aquecimento.",
+         "explanation_en": "Full-bodied reds should be served at 16-18°C. 'Room temperature' is a myth from unheated castles."},
+        
+        {"question_id": "adv_q6", "track_id": "advanced", "question_type": "multiple_choice",
+         "question_pt": "Qual é o método de produção do Amarone?",
+         "question_en": "What is the production method for Amarone?",
+         "options_pt": ["Fermentação em barrica", "Appassimento (secagem das uvas)", "Maceração carbônica", "Fortificação"],
+         "options_en": ["Barrel fermentation", "Appassimento (grape drying)", "Carbonic maceration", "Fortification"],
+         "correct_answer": 1,
+         "explanation_pt": "Amarone usa o método Appassimento, onde as uvas são secas por 3-4 meses antes da fermentação, concentrando açúcares e sabores.",
+         "explanation_en": "Amarone uses the Appassimento method, where grapes are dried for 3-4 months before fermentation, concentrating sugars and flavors."},
+        
+        {"question_id": "adv_q7", "track_id": "advanced", "question_type": "true_false",
+         "question_pt": "A maioria dos vinhos melhora significativamente com o envelhecimento.",
+         "question_en": "Most wines improve significantly with aging.",
+         "options_pt": ["Verdadeiro", "Falso"],
+         "options_en": ["True", "False"],
+         "correct_answer": 1,
+         "explanation_pt": "Falso. Apenas 1-5% dos vinhos realmente melhoram com guarda. A maioria deve ser consumida em 2-3 anos.",
+         "explanation_en": "False. Only 1-5% of wines actually improve with aging. Most should be consumed within 2-3 years."},
+        
+        {"question_id": "adv_q8", "track_id": "advanced", "question_type": "multiple_choice",
+         "question_pt": "Qual defeito do vinho é caracterizado por aromas de curral e band-aid?",
+         "question_en": "Which wine fault is characterized by barnyard and band-aid aromas?",
+         "options_pt": ["TCA (rolha)", "Oxidação", "Brettanomyces", "Redução"],
+         "options_en": ["TCA (cork taint)", "Oxidation", "Brettanomyces", "Reduction"],
+         "correct_answer": 2,
+         "explanation_pt": "Brettanomyces é uma levedura que produz compostos com aromas de curral, suor de cavalo e band-aid.",
+         "explanation_en": "Brettanomyces is a yeast that produces compounds with barnyard, horse sweat and band-aid aromas."}
+    ]
+    
+    await db.lessons.insert_many(new_advanced_lessons)
+    await db.quiz_questions.insert_many(new_advanced_questions)
+    await db.study_tracks.update_one({"track_id": "advanced"}, {"$set": {"lessons_count": 10}})
+    
+    return {
+        "message": "Advanced content expanded successfully",
+        "new_lessons": len(new_advanced_lessons),
+        "new_questions": len(new_advanced_questions)
+    }
+
 # Include router
 app.include_router(api_router)
 
