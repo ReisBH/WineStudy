@@ -1925,6 +1925,111 @@ Many producers find balance:
         "new_questions": len(new_quiz_questions)
     }
 
+# ======================== COMPLETE GRAPE SEEDING ========================
+
+@api_router.post("/seed/grapes-complete")
+async def seed_complete_grapes():
+    """Seed the database with a comprehensive list of grape varieties from all major wine regions"""
+    
+    # Check if grapes already seeded extensively
+    grape_count = await db.grapes.count_documents({})
+    if grape_count > 50:
+        return {"message": "Grapes already extensively seeded", "grape_count": grape_count}
+    
+    # Clear existing grapes to avoid duplicates
+    await db.grapes.delete_many({})
+    
+    # Insert all complete grapes
+    await db.grapes.insert_many(COMPLETE_GRAPES)
+    
+    # Update aroma tags with any new aromas found in the grapes
+    existing_tags = {tag["name_en"] async for tag in db.aroma_tags.find({}, {"name_en": 1})}
+    
+    # Collect all unique aromas from the complete grapes
+    all_aromas = set()
+    for grape in COMPLETE_GRAPES:
+        all_aromas.update(grape.get("aromatic_notes", []))
+        all_aromas.update(grape.get("flavor_notes", []))
+    
+    # Add new aroma tags that don't exist yet
+    new_aroma_tags = []
+    aroma_categories = {
+        "fruit": ["Cherry", "Raspberry", "Strawberry", "Blackberry", "Plum", "Apple", "Pear", "Peach", "Apricot", 
+                  "Citrus", "Lime", "Lemon", "Grapefruit", "Orange", "Tropical fruits", "Passion fruit", 
+                  "Gooseberry", "Cassis", "Black currant", "Red berries", "Dark fruits", "Fig", "Prune", "Raisins",
+                  "Stone fruit", "Jam", "Kirsch", "Sour cherry", "Blood orange", "Quince", "Melon"],
+        "floral": ["Rose", "Violet", "White flowers", "Orange blossom", "Honeysuckle", "Acacia", "Peony", 
+                   "Elderflower", "Chamomile", "Geranium", "Floral"],
+        "vegetal": ["Grass", "Herbs", "Green pepper", "Mint", "Tomato leaf", "Asparagus", "Dried herbs", 
+                    "Bay leaf", "Sage", "Fennel", "Garrigue", "Pea shoot", "Herbal"],
+        "spice": ["Black pepper", "White pepper", "Spice", "Licorice", "Ginger", "Cinnamon", "Clove", "Pepper"],
+        "oak": ["Oak", "Vanilla", "Cedar", "Toast", "Coconut", "Sandalwood", "Smoke"],
+        "earth": ["Earth", "Leather", "Truffle", "Mushroom", "Forest floor", "Wet wool", "Lanolin", 
+                  "Volcanic ash", "Tar", "Graphite", "Pencil lead", "Slate", "Game", "Meat"],
+        "mineral": ["Mineral", "Saline", "Chalk", "Flint", "Sea salt", "Wet stone"],
+        "nuts": ["Almond", "Hazelnut", "Nuts", "Bitter almond", "Walnut", "Marzipan"],
+        "sweet": ["Honey", "Chocolate", "Dark chocolate", "Cocoa", "Caramel", "Mocha", "Butterscotch"],
+        "dairy": ["Butter", "Cream", "Yogurt", "Bread", "Yeast"],
+        "roasted": ["Coffee", "Tobacco", "Smoke", "Toast", "Rubber", "Ink", "Bacon"],
+        "other": ["Petrol", "Musk", "Turkish delight", "Lentil"]
+    }
+    
+    # Map aromas to categories
+    def get_category(aroma):
+        for cat, aromas in aroma_categories.items():
+            if aroma in aromas:
+                return cat
+        return "other"
+    
+    # Create simple Portuguese translations
+    pt_translations = {
+        "Cherry": "Cereja", "Raspberry": "Framboesa", "Strawberry": "Morango", "Blackberry": "Amora",
+        "Plum": "Ameixa", "Apple": "Maçã", "Pear": "Pera", "Peach": "Pêssego", "Apricot": "Damasco",
+        "Citrus": "Cítrico", "Lime": "Lima", "Lemon": "Limão", "Grapefruit": "Grapefruit",
+        "Tropical fruits": "Frutas tropicais", "Passion fruit": "Maracujá", "Gooseberry": "Groselha",
+        "Cassis": "Cassis", "Black currant": "Groselha preta", "Red berries": "Frutas vermelhas",
+        "Dark fruits": "Frutas escuras", "Fig": "Figo", "Rose": "Rosa", "Violet": "Violeta",
+        "White flowers": "Flores brancas", "Orange blossom": "Flor de laranjeira",
+        "Grass": "Capim", "Herbs": "Ervas", "Green pepper": "Pimentão verde", "Mint": "Menta",
+        "Tomato leaf": "Folha de tomate", "Dried herbs": "Ervas secas",
+        "Black pepper": "Pimenta preta", "White pepper": "Pimenta branca", "Spice": "Especiarias",
+        "Licorice": "Alcaçuz", "Ginger": "Gengibre",
+        "Oak": "Carvalho", "Vanilla": "Baunilha", "Cedar": "Cedro", "Toast": "Tostado",
+        "Earth": "Terra", "Leather": "Couro", "Truffle": "Trufa", "Mushroom": "Cogumelo",
+        "Forest floor": "Chão de floresta", "Tar": "Alcatrão", "Graphite": "Grafite",
+        "Mineral": "Mineral", "Saline": "Salino", "Slate": "Ardósia",
+        "Almond": "Amêndoa", "Hazelnut": "Avelã", "Nuts": "Nozes",
+        "Honey": "Mel", "Chocolate": "Chocolate", "Dark chocolate": "Chocolate amargo",
+        "Cocoa": "Cacau", "Mocha": "Mocha",
+        "Butter": "Manteiga", "Cream": "Creme",
+        "Coffee": "Café", "Tobacco": "Tabaco", "Smoke": "Defumado", "Bacon": "Bacon",
+        "Petrol": "Petróleo", "Game": "Caça", "Meat": "Carne"
+    }
+    
+    for aroma in all_aromas:
+        if aroma not in existing_tags:
+            new_aroma_tags.append({
+                "tag_id": aroma.lower().replace(" ", "_").replace("-", "_"),
+                "name_pt": pt_translations.get(aroma, aroma),
+                "name_en": aroma,
+                "category": get_category(aroma),
+                "emoji": "🍷"  # Default emoji
+            })
+    
+    if new_aroma_tags:
+        await db.aroma_tags.insert_many(new_aroma_tags)
+    
+    return {
+        "message": "Complete grape database seeded successfully",
+        "grapes_added": len(COMPLETE_GRAPES),
+        "new_aroma_tags_added": len(new_aroma_tags),
+        "grape_types": {
+            "red": len([g for g in COMPLETE_GRAPES if g["grape_type"] == "red"]),
+            "white": len([g for g in COMPLETE_GRAPES if g["grape_type"] == "white"])
+        },
+        "countries": list(set(g["origin_country"] for g in COMPLETE_GRAPES))
+    }
+
 # Include router
 app.include_router(api_router)
 
