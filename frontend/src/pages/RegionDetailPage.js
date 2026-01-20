@@ -213,33 +213,48 @@ const RegionDetailPage = () => {
                 <CardHeader>
                   <CardTitle className="font-serif flex items-center gap-2">
                     <Thermometer className="w-5 h-5 text-wine-500" />
-                    Clima
+                    {language === 'pt' ? 'Clima' : 'Climate'}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    {region.climate?.type && (
-                      <InfoItem
-                        icon={Thermometer}
-                        label="Tipo de Clima"
-                        value={region.climate.type}
-                      />
-                    )}
-                    {region.climate?.temperature && (
-                      <InfoItem
-                        icon={Thermometer}
-                        label="Temperatura"
-                        value={region.climate.temperature}
-                      />
-                    )}
-                    {region.climate?.rainfall && (
-                      <InfoItem
-                        icon={Droplets}
-                        label="Precipitação"
-                        value={region.climate.rainfall}
-                      />
-                    )}
-                  </div>
+                  {/* Handle climate as string or object */}
+                  {typeof region.climate === 'string' ? (
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-wine-500/10 rounded-sm flex items-center justify-center">
+                        <Thermometer className="w-6 h-6 text-wine-500" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">
+                          {language === 'pt' ? 'Tipo de Clima' : 'Climate Type'}
+                        </p>
+                        <p className="text-lg font-medium">{region.climate}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      {region.climate?.type && (
+                        <InfoItem
+                          icon={Thermometer}
+                          label={language === 'pt' ? 'Tipo de Clima' : 'Climate Type'}
+                          value={region.climate.type}
+                        />
+                      )}
+                      {region.climate?.temperature && (
+                        <InfoItem
+                          icon={Thermometer}
+                          label={language === 'pt' ? 'Temperatura' : 'Temperature'}
+                          value={region.climate.temperature}
+                        />
+                      )}
+                      {region.climate?.rainfall && (
+                        <InfoItem
+                          icon={Droplets}
+                          label={language === 'pt' ? 'Precipitação' : 'Rainfall'}
+                          value={region.climate.rainfall}
+                        />
+                      )}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>
