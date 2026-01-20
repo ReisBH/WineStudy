@@ -200,17 +200,21 @@ const GrapeDetailPage = () => {
                   <div>
                     <h4 className="text-sm font-medium mb-3 flex items-center gap-2">
                       <Tag className="w-4 h-4" />
-                      Aromas Primários (Nariz)
+                      {language === 'pt' ? 'Aromas Primários (Nariz)' : 'Primary Aromas (Nose)'}
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {grape.aromatic_notes?.map((note, index) => (
-                        <Badge 
+                        <Link 
                           key={index}
-                          variant="outline"
-                          className="px-3 py-1.5 text-sm"
+                          to={`/aromas/${note.toLowerCase().replace(/ /g, '_')}`}
                         >
-                          {note}
-                        </Badge>
+                          <Badge 
+                            variant="outline"
+                            className="px-3 py-1.5 text-sm cursor-pointer hover:bg-wine-500/20 hover:border-wine-500 transition-colors"
+                          >
+                            {note}
+                          </Badge>
+                        </Link>
                       ))}
                     </div>
                   </div>
