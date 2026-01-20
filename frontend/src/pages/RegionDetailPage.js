@@ -156,58 +156,11 @@ const RegionDetailPage = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Terroir */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <Card className="border-border/40">
-                <CardHeader>
-                  <CardTitle className="font-serif flex items-center gap-2">
-                    <Mountain className="w-5 h-5 text-wine-500" />
-                    Terroir
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    {region.terroir?.soil && (
-                      <InfoItem
-                        icon={Grape}
-                        label="Tipo de Solo"
-                        value={region.terroir.soil}
-                      />
-                    )}
-                    {region.terroir?.altitude && (
-                      <InfoItem
-                        icon={Mountain}
-                        label="Altitude"
-                        value={region.terroir.altitude}
-                      />
-                    )}
-                    {region.terroir?.maritime_influence !== undefined && (
-                      <InfoItem
-                        icon={Droplets}
-                        label="Influência Marítima"
-                        value={region.terroir.maritime_influence ? "Sim" : "Não"}
-                      />
-                    )}
-                  </div>
-                  {region.terroir && (
-                    <p className="mt-6 text-muted-foreground font-accent italic">
-                      O terroir único desta região confere aos vinhos características distintas 
-                      que refletem o solo, a altitude e as influências climáticas locais.
-                    </p>
-                  )}
-                </CardContent>
-              </Card>
-            </motion.div>
-
             {/* Climate */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.2 }}
             >
               <Card className="border-border/40">
                 <CardHeader>
@@ -230,7 +183,7 @@ const RegionDetailPage = () => {
                         <p className="text-lg font-medium">{region.climate}</p>
                       </div>
                     </div>
-                  ) : (
+                  ) : region.climate ? (
                     <div className="grid sm:grid-cols-2 gap-6">
                       {region.climate?.type && (
                         <InfoItem
@@ -254,10 +207,50 @@ const RegionDetailPage = () => {
                         />
                       )}
                     </div>
+                  ) : (
+                    <p className="text-muted-foreground italic">
+                      {language === 'pt' ? 'Informação de clima não disponível' : 'Climate information not available'}
+                    </p>
                   )}
                 </CardContent>
               </Card>
             </motion.div>
+
+            {/* Terroir - only show if data exists */}
+            {region.terroir && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <Card className="border-border/40">
+                  <CardHeader>
+                    <CardTitle className="font-serif flex items-center gap-2">
+                      <Mountain className="w-5 h-5 text-wine-500" />
+                      Terroir
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      {region.terroir?.soil && (
+                        <InfoItem
+                          icon={Grape}
+                          label={language === 'pt' ? 'Tipo de Solo' : 'Soil Type'}
+                          value={region.terroir.soil}
+                        />
+                      )}
+                      {region.terroir?.altitude && (
+                        <InfoItem
+                          icon={Mountain}
+                          label={language === 'pt' ? 'Altitude' : 'Altitude'}
+                          value={region.terroir.altitude}
+                        />
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )}
 
             {/* Wine Styles */}
             <motion.div
