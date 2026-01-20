@@ -70,6 +70,12 @@ const AppRouter = () => {
       <Route path="/grapes" element={<Layout><GrapesPage /></Layout>} />
       <Route path="/grapes/:grapeId" element={<Layout><GrapeDetailPage /></Layout>} />
       
+      {/* Aromas - Public */}
+      <Route path="/aromas/:aromaId" element={<Layout><AromaDetailPage /></Layout>} />
+      
+      {/* Production Methods - Public */}
+      <Route path="/production" element={<Layout><ProductionMethodsPage /></Layout>} />
+      
       {/* Study - Public access to track list, lessons might be gated */}
       <Route path="/study" element={<Layout><StudyPage /></Layout>} />
       <Route path="/study/:trackId" element={<Layout><LessonPage /></Layout>} />
