@@ -21,6 +21,8 @@ import QuizPage from './pages/QuizPage';
 import TastingListPage from './pages/TastingListPage';
 import TastingFormPage from './pages/TastingFormPage';
 import TastingDetailPage from './pages/TastingDetailPage';
+import AromaDetailPage from './pages/AromaDetailPage';
+import ProductionMethodsPage from './pages/ProductionMethodsPage';
 
 import './App.css';
 
