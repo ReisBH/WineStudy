@@ -71,13 +71,16 @@ class RegionResponse(BaseModel):
     region_id: str
     country_id: str
     name: str
-    description_pt: str
-    description_en: str
-    terroir: Dict[str, Any]
-    climate: Dict[str, Any]
-    appellations: List[str]
-    main_grapes: List[str]
-    wine_styles: List[str]
+    name_pt: Optional[str] = None
+    name_en: Optional[str] = None
+    description_pt: Optional[str] = ""
+    description_en: Optional[str] = ""
+    terroir: Optional[Dict[str, Any]] = None
+    climate: Optional[Any] = None
+    appellations: Optional[List[str]] = []
+    main_grapes: Optional[List[str]] = []
+    key_grapes: Optional[List[str]] = []
+    wine_styles: Optional[List[str]] = []
 
 class GrapeResponse(BaseModel):
     model_config = ConfigDict(extra="ignore")
