@@ -14,6 +14,7 @@ import bcrypt
 import jwt
 import httpx
 from grape_data import COMPLETE_GRAPES
+from region_data import COMPLETE_REGIONS
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
