@@ -169,9 +169,9 @@ const StudyPage = () => {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-serif text-lg font-semibold mb-1">Seu Progresso</h3>
+                    <h3 className="font-serif text-lg font-semibold mb-1">{t('dashboard.progress')}</h3>
                     <p className="text-muted-foreground">
-                      {progress.completed_lessons?.length || 0} lições completadas
+                      {progress.completed_lessons?.length || 0} {t('study.lessons')} {language === 'pt' ? 'completadas' : 'completed'}
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
