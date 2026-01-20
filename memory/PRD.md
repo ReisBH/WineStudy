@@ -62,6 +62,12 @@ Aplicativo educacional para estudo de vinhos com foco em conteúdo WSET, incluin
   - Traduções PT/EN em todos os campos
   - Castas principais clicáveis
 
+**Internacionalização (P1):**
+- [x] Tradução completa PT/EN em todas as páginas (20/01/2026)
+  - Landing Page, Atlas, Castas, Estudo, Degustação
+  - Quiz, Dashboard, Login/Registro
+  - Navegação, Footer, Mensagens de sistema
+
 ---
 
 ### 🟡 Próximas Tarefas (P1)
