@@ -11,7 +11,9 @@ import AuthPage from './pages/AuthPage';
 import AuthCallback from './pages/AuthCallback';
 import DashboardPage from './pages/DashboardPage';
 import AtlasPage from './pages/AtlasPage';
+import RegionDetailPage from './pages/RegionDetailPage';
 import GrapesPage from './pages/GrapesPage';
+import GrapeDetailPage from './pages/GrapeDetailPage';
 import StudyPage from './pages/StudyPage';
 import LessonPage from './pages/LessonPage';
 import QuizPage from './pages/QuizPage';
@@ -60,9 +62,9 @@ const AppRouter = () => {
       {/* Atlas & Grapes - Public */}
       <Route path="/atlas" element={<Layout><AtlasPage /></Layout>} />
       <Route path="/atlas/:countryId" element={<Layout><AtlasPage /></Layout>} />
-      <Route path="/atlas/region/:regionId" element={<Layout><AtlasPage /></Layout>} />
+      <Route path="/atlas/region/:regionId" element={<Layout><RegionDetailPage /></Layout>} />
       <Route path="/grapes" element={<Layout><GrapesPage /></Layout>} />
-      <Route path="/grapes/:grapeId" element={<Layout><GrapesPage /></Layout>} />
+      <Route path="/grapes/:grapeId" element={<Layout><GrapeDetailPage /></Layout>} />
       
       {/* Study - Public access to track list, lessons might be gated */}
       <Route path="/study" element={<Layout><StudyPage /></Layout>} />
