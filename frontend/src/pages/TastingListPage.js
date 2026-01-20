@@ -193,6 +193,7 @@ const TastingListPage = () => {
                 <TastingCard 
                   tasting={tasting} 
                   onDelete={(id) => setDeleteId(id)}
+                  language={language}
                 />
               </motion.div>
             ))}
@@ -205,15 +206,15 @@ const TastingListPage = () => {
           >
             <Wine className="w-20 h-20 text-muted-foreground/20 mx-auto mb-6" />
             <h3 className="font-serif text-xl font-semibold mb-2">
-              Nenhuma degustação registrada
+              {t('tasting.noTastings')}
             </h3>
             <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
-              Comece a registrar suas experiências usando a Sistemática WSET
+              {t('tasting.noTastingsDescription')}
             </p>
             <Link to="/tasting/new">
               <Button className="bg-wine-500 hover:bg-wine-600 text-white rounded-sm">
                 <Plus className="w-4 h-4 mr-2" />
-                Registrar Primeira Degustação
+                {t('tasting.firstTasting')}
               </Button>
             </Link>
           </motion.div>
@@ -223,18 +224,18 @@ const TastingListPage = () => {
         <AlertDialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Excluir degustação?</AlertDialogTitle>
+              <AlertDialogTitle>{t('tasting.deleteTitle')}</AlertDialogTitle>
               <AlertDialogDescription>
-                Esta ação não pode ser desfeita. A degustação será permanentemente removida.
+                {t('tasting.deleteDescription')}
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancelar</AlertDialogCancel>
+              <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
               <AlertDialogAction 
                 onClick={handleDelete}
                 className="bg-red-500 hover:bg-red-600"
               >
-                Excluir
+                {t('common.delete')}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
