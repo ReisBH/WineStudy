@@ -204,7 +204,7 @@ const DashboardPage = () => {
                   <CardTitle className="font-serif text-xl">{t('dashboard.recentTastings')}</CardTitle>
                   <Link to="/tasting">
                     <Button variant="ghost" size="sm" className="text-wine-500 hover:text-wine-600">
-                      Ver todas
+                      {language === 'pt' ? 'Ver todas' : 'View all'}
                     </Button>
                   </Link>
                 </CardHeader>
@@ -224,7 +224,7 @@ const DashboardPage = () => {
                               <p className="font-medium">{tasting.wine_name}</p>
                               <p className="text-sm text-muted-foreground">
                                 {tasting.vintage && `${tasting.vintage} • `}
-                                {new Date(tasting.created_at).toLocaleDateString()}
+                                {new Date(tasting.created_at).toLocaleDateString(language === 'pt' ? 'pt-BR' : 'en-US')}
                               </p>
                             </div>
                           </div>
@@ -237,10 +237,12 @@ const DashboardPage = () => {
                   ) : (
                     <div className="text-center py-8">
                       <GlassWater className="w-12 h-12 text-muted-foreground/30 mx-auto mb-3" />
-                      <p className="text-muted-foreground">Nenhuma degustação ainda</p>
+                      <p className="text-muted-foreground">
+                        {language === 'pt' ? 'Nenhuma degustação ainda' : 'No tastings yet'}
+                      </p>
                       <Link to="/tasting/new">
                         <Button variant="link" className="text-wine-500 mt-2">
-                          Registrar primeira degustação
+                          {t('tasting.firstTasting')}
                         </Button>
                       </Link>
                     </div>
