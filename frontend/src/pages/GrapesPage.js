@@ -201,7 +201,7 @@ const GrapeCard = ({ grape, language, delay }) => (
             {language === 'pt' ? grape.description_pt : grape.description_en}
           </p>
 
-          {/* Aromatic Notes - Translated */}
+          {/* Aromatic Notes - Clickable to navigate */}
           <div className="mb-4">
             <p className="text-xs text-muted-foreground mb-2 flex items-center gap-1">
               <Tag className="w-3 h-3" /> 
@@ -209,12 +209,14 @@ const GrapeCard = ({ grape, language, delay }) => (
             </p>
             <div className="flex flex-wrap gap-1">
               {grape.aromatic_notes?.slice(0, 4).map((note) => (
-                <span 
+                <Link 
                   key={note}
-                  className="px-2 py-0.5 bg-muted text-xs rounded-sm"
+                  to={`/aromas/${note.toLowerCase().replace(/ /g, '_')}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="px-2 py-0.5 bg-muted text-xs rounded-sm hover:bg-wine-500/20 hover:text-wine-600 transition-colors cursor-pointer"
                 >
                   {translateNote(note, language)}
-                </span>
+                </Link>
               ))}
               {grape.aromatic_notes?.length > 4 && (
                 <span className="px-2 py-0.5 text-xs text-muted-foreground">
