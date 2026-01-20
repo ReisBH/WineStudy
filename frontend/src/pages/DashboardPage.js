@@ -163,13 +163,17 @@ const DashboardPage = () => {
                   </div>
                   <div className="relative h-full p-6 flex flex-col justify-between text-white">
                     <div>
-                      <span className="text-wine-200 text-sm font-medium">Trilha Atual</span>
-                      <h3 className="font-serif text-2xl font-bold mt-1">Fundamentos do Vinho</h3>
+                      <span className="text-wine-200 text-sm font-medium">
+                        {language === 'pt' ? 'Trilha Atual' : 'Current Track'}
+                      </span>
+                      <h3 className="font-serif text-2xl font-bold mt-1">
+                        {language === 'pt' ? 'Fundamentos do Vinho' : 'Wine Fundamentals'}
+                      </h3>
                     </div>
                     <div>
                       <div className="flex items-center justify-between text-sm mb-2">
-                        <span>Progresso</span>
-                        <span>{lessonsCompleted}/5 lições</span>
+                        <span>{t('study.progress')}</span>
+                        <span>{lessonsCompleted}/5 {t('study.lessons')}</span>
                       </div>
                       <Progress value={(lessonsCompleted / 5) * 100} className="h-2 bg-wine-800" />
                     </div>
