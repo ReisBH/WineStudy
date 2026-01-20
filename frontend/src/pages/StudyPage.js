@@ -24,7 +24,7 @@ const levelLabels = {
   advanced: { pt: 'Avançado', en: 'Advanced' },
 };
 
-const TrackCard = ({ track, progress, language, delay }) => {
+const TrackCard = ({ track, progress, language, t, delay }) => {
   const completedLessons = progress?.completed_lessons || [];
   const trackLessonsCompleted = completedLessons.filter(l => l.startsWith(track.level)).length;
   const progressPercent = (trackLessonsCompleted / track.lessons_count) * 100;
@@ -68,18 +68,18 @@ const TrackCard = ({ track, progress, language, delay }) => {
           <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
             <span className="flex items-center gap-1">
               <BookOpen className="w-4 h-4" />
-              {track.lessons_count} lições
+              {track.lessons_count} {t('study.lessons')}
             </span>
             <span className="flex items-center gap-1">
               <Clock className="w-4 h-4" />
-              ~{track.lessons_count * 12} min
+              ~{track.lessons_count * 12} {t('study.minutes')}
             </span>
           </div>
 
           {progressPercent > 0 && (
             <div className="mb-4">
               <div className="flex items-center justify-between text-sm mb-2">
-                <span className="text-muted-foreground">Progresso</span>
+                <span className="text-muted-foreground">{t('study.progress')}</span>
                 <span className="font-medium">{trackLessonsCompleted}/{track.lessons_count}</span>
               </div>
               <Progress value={progressPercent} className="h-2" />
@@ -91,7 +91,7 @@ const TrackCard = ({ track, progress, language, delay }) => {
               data-testid={`start-track-${track.track_id}`}
               className="w-full bg-wine-500 hover:bg-wine-600 text-white rounded-sm"
             >
-              {progressPercent > 0 ? 'Continuar' : 'Começar'}
+              {progressPercent > 0 ? t('study.continueTrack') : t('study.startTrack')}
               <ChevronRight className="w-4 h-4 ml-1" />
             </Button>
           </Link>
