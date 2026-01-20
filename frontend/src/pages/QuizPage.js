@@ -113,10 +113,12 @@ const QuizPage = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <Brain className="w-16 h-16 text-muted-foreground/30 mx-auto mb-4" />
-          <p className="text-muted-foreground">Nenhuma pergunta disponível</p>
+          <p className="text-muted-foreground">
+            {language === 'pt' ? 'Nenhuma pergunta disponível' : 'No questions available'}
+          </p>
           <Link to="/study">
             <Button variant="link" className="text-wine-500 mt-2">
-              Voltar para estudos
+              {t('quiz.backToStudy')}
             </Button>
           </Link>
         </div>
@@ -144,11 +146,13 @@ const QuizPage = () => {
                 }`} />
               </div>
               
-              <h2 className="font-serif text-2xl font-bold mb-2">Quiz Concluído!</h2>
+              <h2 className="font-serif text-2xl font-bold mb-2">
+                {language === 'pt' ? 'Quiz Concluído!' : 'Quiz Complete!'}
+              </h2>
               <p className="text-muted-foreground mb-6">
                 {percentage >= 60 
-                  ? 'Parabéns! Você foi muito bem!' 
-                  : 'Continue estudando para melhorar seu resultado.'}
+                  ? (language === 'pt' ? 'Parabéns! Você foi muito bem!' : 'Congratulations! You did great!')
+                  : (language === 'pt' ? 'Continue estudando para melhorar seu resultado.' : 'Keep studying to improve your score.')}
               </p>
               
               <div className="bg-muted/30 rounded-sm p-6 mb-8">
@@ -156,7 +160,7 @@ const QuizPage = () => {
                   {score}/{questions.length}
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  {percentage}% de acertos
+                  {percentage}% {language === 'pt' ? 'de acertos' : 'correct'}
                 </p>
               </div>
 
@@ -167,11 +171,11 @@ const QuizPage = () => {
                   className="w-full bg-wine-500 hover:bg-wine-600 text-white rounded-sm"
                 >
                   <RotateCcw className="w-4 h-4 mr-2" />
-                  Tentar Novamente
+                  {t('quiz.tryAgain')}
                 </Button>
                 <Link to="/study" className="block">
                   <Button variant="outline" className="w-full rounded-sm">
-                    Voltar para Estudos
+                    {t('quiz.backToStudy')}
                   </Button>
                 </Link>
               </div>
