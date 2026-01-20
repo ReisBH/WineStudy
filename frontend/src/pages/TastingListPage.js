@@ -78,7 +78,7 @@ const TastingCard = ({ tasting, onDelete, language }) => {
           <Link to={`/tasting/${tasting.tasting_id}`}>
             <Button variant="ghost" size="sm" className="text-wine-500">
               <Eye className="w-4 h-4 mr-1" />
-              Ver
+              {language === 'pt' ? 'Ver' : 'View'}
             </Button>
           </Link>
           <Button 
@@ -96,7 +96,7 @@ const TastingCard = ({ tasting, onDelete, language }) => {
 };
 
 const TastingListPage = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   
