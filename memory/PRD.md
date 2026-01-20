@@ -42,11 +42,14 @@ Build a comprehensive wine education application (WineStudy) with:
 - Quiz APIs (questions, submit answers)
 - Tasting APIs (CRUD operations)
 - Database seeding with comprehensive wine data
+- **Content expansion endpoint for educational content**
 
 ### Frontend (React)
 - Landing page with premium editorial design
 - Atlas page with Old/New World filters
+- **Region detail pages with terroir, climate, appellations, wine styles**
 - Grapes page with type and aroma filters
+- **Grape detail pages with aromatic profile, structure, best regions**
 - Study area with 3 learning tracks
 - Lesson viewer with progress tracking
 - Quiz page with immediate feedback
@@ -55,6 +58,7 @@ Build a comprehensive wine education application (WineStudy) with:
 - Language toggle (PT/EN)
 - Theme toggle (light/dark)
 - Responsive design
+- **Breadcrumb navigation on detail pages**
 
 ### Database Seed Data
 - 10 Countries (5 Old World, 5 New World)
@@ -62,16 +66,20 @@ Build a comprehensive wine education application (WineStudy) with:
 - 12 Grape varieties (with aromatic profiles)
 - 24 Aroma tags (categorized)
 - 3 Study tracks
-- 5 Lessons (basic level)
-- 6 Quiz questions
+- **17 Lessons total:**
+  - 5 Basic (Wine fundamentals)
+  - **8 Intermediate (Terroir, Bordeaux, Burgundy, Winemaking, Sparkling, Fortified, Italy & Spain)**
+  - **4 Advanced (Pinot Noir comparison, Human decisions, Aging, Typicity vs Innovation)**
+- **16 Quiz questions (Basic, Intermediate, Advanced)**
 
 ## Prioritized Backlog
 
 ### P0 - Critical (Future MVP Enhancements)
-- [ ] Add more lessons for intermediate and advanced tracks
-- [ ] Expand quiz question bank
-- [ ] Add region detail pages with maps
-- [ ] Add grape detail pages
+- [x] ~~Add more lessons for intermediate and advanced tracks~~
+- [x] ~~Expand quiz question bank~~
+- [x] ~~Add region detail pages~~
+- [x] ~~Add grape detail pages~~
+- [ ] Country detail pages with full information
 
 ### P1 - High Priority
 - [ ] Google Drive integration for image backup
