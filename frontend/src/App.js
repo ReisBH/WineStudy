@@ -20,6 +20,7 @@ import LessonPage from './pages/LessonPage';
 import QuizPage from './pages/QuizPage';
 import TastingListPage from './pages/TastingListPage';
 import TastingFormPage from './pages/TastingFormPage';
+import TastingDetailPage from './pages/TastingDetailPage';
 
 import './App.css';
 
