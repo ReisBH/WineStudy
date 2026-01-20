@@ -225,17 +225,21 @@ const GrapeDetailPage = () => {
                   <div>
                     <h4 className="text-sm font-medium mb-3 flex items-center gap-2">
                       <Wine className="w-4 h-4" />
-                      Sabores (Paladar)
+                      {language === 'pt' ? 'Sabores (Paladar)' : 'Flavors (Palate)'}
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {grape.flavor_notes?.map((note, index) => (
-                        <Badge 
+                        <Link 
                           key={index}
-                          variant="outline"
-                          className={`px-3 py-1.5 text-sm ${isRed ? 'border-wine-500/30' : 'border-gold-500/30'}`}
+                          to={`/aromas/${note.toLowerCase().replace(/ /g, '_')}`}
                         >
-                          {note}
-                        </Badge>
+                          <Badge 
+                            variant="outline"
+                            className={`px-3 py-1.5 text-sm cursor-pointer hover:bg-wine-500/20 hover:border-wine-500 transition-colors ${isRed ? 'border-wine-500/30' : 'border-gold-500/30'}`}
+                          >
+                            {note}
+                          </Badge>
+                        </Link>
                       ))}
                     </div>
                   </div>
