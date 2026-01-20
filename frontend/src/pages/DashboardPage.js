@@ -57,7 +57,7 @@ const QuickActionCard = ({ icon: Icon, title, description, to, delay }) => (
 );
 
 const DashboardPage = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { user } = useAuth();
   const [progress, setProgress] = useState(null);
   const [recentTastings, setRecentTastings] = useState([]);
@@ -108,7 +108,7 @@ const DashboardPage = () => {
             {t('dashboard.welcome')}, {user?.name?.split(' ')[0] || 'Wine Lover'}
           </h1>
           <p className="text-muted-foreground">
-            Continue sua jornada no mundo do vinho
+            {language === 'pt' ? 'Continue sua jornada no mundo do vinho' : 'Continue your journey in the world of wine'}
           </p>
         </motion.div>
 
