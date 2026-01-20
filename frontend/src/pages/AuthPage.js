@@ -10,7 +10,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'sonner';
 
 const AuthPage = ({ mode = 'login' }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { login, register, initiateGoogleLogin, error } = useAuth();
   const navigate = useNavigate();
   
@@ -32,20 +32,20 @@ const AuthPage = ({ mode = 'login' }) => {
     try {
       if (isLogin) {
         await login(formData.email, formData.password);
-        toast.success('Login realizado com sucesso!');
+        toast.success(language === 'pt' ? 'Login realizado com sucesso!' : 'Login successful!');
         navigate('/dashboard');
       } else {
         if (formData.password !== formData.confirmPassword) {
-          toast.error('As senhas não coincidem');
+          toast.error(language === 'pt' ? 'As senhas não coincidem' : 'Passwords do not match');
           setLoading(false);
           return;
         }
         await register(formData.email, formData.password, formData.name);
-        toast.success('Conta criada com sucesso!');
+        toast.success(language === 'pt' ? 'Conta criada com sucesso!' : 'Account created successfully!');
         navigate('/dashboard');
       }
     } catch (err) {
-      toast.error(err.message || 'Erro ao processar');
+      toast.error(err.message || (language === 'pt' ? 'Erro ao processar' : 'Processing error'));
     } finally {
       setLoading(false);
     }
