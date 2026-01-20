@@ -32,6 +32,14 @@ const qualityColors = {
   outstanding: 'bg-gold-500/10 text-gold-600',
 };
 
+const qualityLabels = {
+  poor: 'Deficiente',
+  acceptable: 'Aceitável',
+  good: 'Bom',
+  very_good: 'Muito Bom',
+  outstanding: 'Excepcional',
+};
+
 const TastingCard = ({ tasting, onDelete }) => {
   const quality = tasting.conclusion?.quality || 'good';
   
@@ -46,13 +54,15 @@ const TastingCard = ({ tasting, onDelete }) => {
             <div>
               <h3 className="font-serif font-semibold text-lg">{tasting.wine_name}</h3>
               <p className="text-sm text-muted-foreground">
+                {tasting.producer && `${tasting.producer} • `}
                 {tasting.vintage && `${tasting.vintage} • `}
+                {tasting.region && `${tasting.region} • `}
                 {new Date(tasting.created_at).toLocaleDateString('pt-BR')}
               </p>
             </div>
           </div>
           <span className={`px-3 py-1 rounded-sm text-xs font-medium ${qualityColors[quality] || qualityColors.good}`}>
-            {quality}
+            {qualityLabels[quality] || quality}
           </span>
         </div>
         
