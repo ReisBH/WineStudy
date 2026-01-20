@@ -262,21 +262,52 @@ const RegionDetailPage = () => {
                 <CardHeader>
                   <CardTitle className="font-serif flex items-center gap-2">
                     <Wine className="w-5 h-5 text-wine-500" />
-                    Estilos de Vinho
+                    {language === 'pt' ? 'Estilos de Vinho' : 'Wine Styles'}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {region.wine_styles?.map((style, index) => (
-                      <Badge 
-                        key={index} 
-                        variant="outline" 
-                        className="text-sm px-3 py-1"
-                      >
-                        {style}
-                      </Badge>
-                    ))}
-                  </div>
+                  {region.wine_styles?.length > 0 ? (
+                    <div className="flex flex-wrap gap-2">
+                      {region.wine_styles.map((style, index) => (
+                        <Badge 
+                          key={index} 
+                          variant="outline" 
+                          className="text-sm px-3 py-1"
+                        >
+                          {style}
+                        </Badge>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <p className="text-muted-foreground">
+                        {language === 'pt' 
+                          ? `${region.name} é conhecida por produzir vinhos de alta qualidade com as seguintes características:`
+                          : `${region.name} is known for producing high-quality wines with the following characteristics:`}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {(region.key_grapes || region.main_grapes)?.some(g => 
+                          ['Cabernet Sauvignon', 'Merlot', 'Pinot Noir', 'Syrah', 'Tempranillo', 'Sangiovese', 'Nebbiolo'].includes(g)
+                        ) && (
+                          <Badge variant="outline" className="text-sm px-3 py-1 border-wine-500/50">
+                            🍷 {language === 'pt' ? 'Tintos' : 'Red Wines'}
+                          </Badge>
+                        )}
+                        {(region.key_grapes || region.main_grapes)?.some(g => 
+                          ['Chardonnay', 'Sauvignon Blanc', 'Riesling', 'Pinot Grigio', 'Albariño'].includes(g)
+                        ) && (
+                          <Badge variant="outline" className="text-sm px-3 py-1 border-gold-500/50">
+                            🥂 {language === 'pt' ? 'Brancos' : 'White Wines'}
+                          </Badge>
+                        )}
+                        {region.name.toLowerCase().includes('champagne') && (
+                          <Badge variant="outline" className="text-sm px-3 py-1">
+                            🍾 {language === 'pt' ? 'Espumantes' : 'Sparkling'}
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>
