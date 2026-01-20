@@ -1,0 +1,140 @@
+{
+  "identity": {
+    "name": "WineStudy",
+    "persona": "E1 - The Anti-AI Designer",
+    "tone": "Premium Editorial, Academic, Sophisticated, Organic",
+    "aesthetic": "Old World Charm meets Modern SaaS"
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Playfair Display, serif",
+      "body": "Manrope, sans-serif",
+      "accent": "Cormorant Garamond, serif"
+    },
+    "google_fonts_import": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap",
+    "usage_rules": {
+      "headings": "Use Playfair Display for all H1-H3. Tracking tight (-0.02em). Font weight 600 or 700.",
+      "body": "Use Manrope for all UI text, inputs, and long-form reading. Line height relaxed (1.6).",
+      "accent": "Use Cormorant Garamond Italic for tasting notes, quotes, and 'sommelier tips'."
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "DEFAULT": "#722F37",
+        "foreground": "#FFFFFF",
+        "50": "#FDF2F3",
+        "100": "#FBE6E8",
+        "200": "#F5C0C5",
+        "300": "#EE9AA3",
+        "400": "#E05564",
+        "500": "#722F37",
+        "600": "#5D262D",
+        "700": "#481D23",
+        "800": "#331519",
+        "900": "#1E0C0F"
+      },
+      "secondary": {
+        "DEFAULT": "#F5F5F0",
+        "foreground": "#2D2D2D",
+        "50": "#FCFCFA",
+        "100": "#F5F5F0",
+        "200": "#EBEBE0",
+        "300": "#E0E0D1",
+        "400": "#D6D6C2",
+        "500": "#CCCCB3",
+        "600": "#A3A38F",
+        "700": "#7A7A6B",
+        "800": "#525247",
+        "900": "#292924"
+      },
+      "accent": {
+        "DEFAULT": "#D4AF37",
+        "foreground": "#1A1A1A",
+        "50": "#FBF8EB",
+        "100": "#F7F1D6",
+        "200": "#EFE3AD",
+        "300": "#E6D485",
+        "400": "#DEC65C",
+        "500": "#D4AF37",
+        "600": "#AA8C2C",
+        "700": "#806921",
+        "800": "#554616",
+        "900": "#2B230B"
+      },
+      "background": "#F5F5F0",
+      "foreground": "#2D2D2D",
+      "card": "#FFFFFF",
+      "card_foreground": "#2D2D2D",
+      "muted": "#EBEBE0",
+      "muted_foreground": "#7A7A6B",
+      "border": "#E0E0D1"
+    },
+    "dark_mode_palette": {
+      "background": "#1A1A18",
+      "foreground": "#F5F5F0",
+      "card": "#242422",
+      "card_foreground": "#F5F5F0",
+      "primary": "#8A3A44",
+      "secondary": "#2D2D2D",
+      "muted": "#333330",
+      "border": "#444440"
+    }
+  },
+  "visual_enhancers": {
+    "texture": "Use a subtle noise texture overlay on the background (opacity 0.03) to simulate paper.",
+    "shadows": "Soft, diffuse shadows: shadow-[0_8px_30px_rgb(0,0,0,0.04)].",
+    "borders": "1px solid border-border/60 for cards. No heavy borders.",
+    "radius": "rounded-sm (2px) or rounded-md (6px). Avoid fully rounded 'pill' shapes for containers, keep them editorial/rectangular.",
+    "glassmorphism": "Use backdrop-blur-md with bg-white/80 (light) or bg-black/60 (dark) for sticky headers."
+  },
+  "layout_strategies": {
+    "dashboard": "Bento Grid (Mode B). Dense, data-rich, but with elegant typography.",
+    "atlas": "Full-screen map interface with floating side-panel for details.",
+    "study_mode": "Single column, wide margins (max-w-2xl), focus mode (distraction-free).",
+    "tasting_diary": "Form-based, but styled like a physical notebook. Input fields should look like lines on paper or clean minimal boxes."
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 rounded-sm px-8 py-6 font-serif tracking-wide uppercase text-sm",
+      "secondary": "border border-primary/20 bg-transparent hover:bg-primary/5 text-primary rounded-sm px-8 py-6 font-serif tracking-wide uppercase text-sm"
+    },
+    "cards": {
+      "style": "bg-card text-card-foreground border border-border/40 shadow-sm hover:shadow-md transition-all duration-300 group relative overflow-hidden",
+      "content": "Padding p-6 or p-8. Always use serif for the card title."
+    },
+    "inputs": {
+      "style": "bg-transparent border-b border-border focus:border-primary focus:ring-0 rounded-none px-0 py-3 transition-colors placeholder:text-muted-foreground/50 font-body"
+    }
+  },
+  "image_urls": {
+    "hero_background": "https://images.unsplash.com/photo-1619525163217-996bd4c1eb92?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "tasting_section": "https://images.unsplash.com/photo-1705169792079-c4e59f322821?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "grape_database": "https://images.unsplash.com/photo-1758639061392-4dc0ccd1f247?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "vineyard_texture": "https://images.unsplash.com/photo-1762947755843-075d85d143c8?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "study_track_basic": "https://images.unsplash.com/photo-1695426629266-e8acbfc17c49?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "study_track_advanced": "https://images.unsplash.com/photo-1745176593922-f7407c893f92?crop=entropy&cs=srgb&fm=jpg&q=85"
+  },
+  "instructions_to_main_agent": [
+    "1. INSTALL DEPENDENCIES: Run 'yarn add framer-motion clsx tailwind-merge' immediately.",
+    "2. CONFIGURE TAILWIND: Update tailwind.config.js to include the 'wine', 'paper', and 'gold' colors defined in the palette. Add the font families.",
+    "3. GLOBAL CSS: Update index.css to set the CSS variables for the new palette. Ensure dark mode variables are also set.",
+    "4. FONT SETUP: Add the Google Fonts link to public/index.html.",
+    "5. COMPONENT OVERRIDES: When using Shadcn components, override the default rounded-md to rounded-sm or rounded-none where appropriate to match the 'Editorial' aesthetic.",
+    "6. MICRO-INTERACTIONS: Use framer-motion for page transitions and subtle hover effects on cards (e.g., slight lift + shadow increase).",
+    "7. NOISE TEXTURE: Create a global 'NoiseOverlay' component that adds a fixed, pointer-events-none, low-opacity noise texture to the entire app for that 'paper' feel.",
+    "8. DATA-TESTID: Ensure every interactive element has a data-testid attribute."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do not use generic centered layouts.",
+    "Create depth through layered design elements.",
+    "Use glass-morphism effects with backdrop filters.",
+    "Every interaction needs micro-animations.",
+    "Use 2-3x more spacing than feels comfortable.",
+    "Subtle grain textures and noise overlays are mandatory.",
+    "Prioritize using pre-existing components from src/components/ui.",
+    "Components MUST use named exports.",
+    "Pages MUST use default exports.",
+    "Use sonner for toasts."
+  ]
+}
