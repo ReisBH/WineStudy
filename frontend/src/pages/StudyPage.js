@@ -226,9 +226,13 @@ const StudyPage = () => {
                     <Play className="w-5 h-5 text-green-500" />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1">Comece pelo Básico</h4>
+                    <h4 className="font-medium mb-1">
+                      {language === 'pt' ? 'Comece pelo Básico' : 'Start with Basics'}
+                    </h4>
                     <p className="text-sm text-muted-foreground">
-                      Aprenda os fundamentos do vinho: tipos, castas e como ler rótulos.
+                      {language === 'pt' 
+                        ? 'Aprenda os fundamentos do vinho: tipos, castas e como ler rótulos.'
+                        : 'Learn wine fundamentals: types, grapes, and how to read labels.'}
                     </p>
                   </div>
                 </div>
@@ -237,9 +241,13 @@ const StudyPage = () => {
                     <BookOpen className="w-5 h-5 text-gold-500" />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1">Aprofunde o Conhecimento</h4>
+                    <h4 className="font-medium mb-1">
+                      {language === 'pt' ? 'Aprofunde o Conhecimento' : 'Deepen Your Knowledge'}
+                    </h4>
                     <p className="text-sm text-muted-foreground">
-                      Explore terroir, regiões clássicas e métodos de produção.
+                      {language === 'pt' 
+                        ? 'Explore terroir, regiões clássicas e métodos de produção.'
+                        : 'Explore terroir, classic regions, and production methods.'}
                     </p>
                   </div>
                 </div>
@@ -248,9 +256,13 @@ const StudyPage = () => {
                     <CheckCircle className="w-5 h-5 text-wine-500" />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1">Teste e Pratique</h4>
+                    <h4 className="font-medium mb-1">
+                      {language === 'pt' ? 'Teste e Pratique' : 'Test and Practice'}
+                    </h4>
                     <p className="text-sm text-muted-foreground">
-                      Faça quizzes e registre degustações para consolidar o aprendizado.
+                      {language === 'pt' 
+                        ? 'Faça quizzes e registre degustações para consolidar o aprendizado.'
+                        : 'Take quizzes and record tastings to consolidate your learning.'}
                     </p>
                   </div>
                 </div>
