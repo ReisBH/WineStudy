@@ -34,15 +34,16 @@ const qualityColors = {
 };
 
 const qualityLabels = {
-  poor: 'Deficiente',
-  acceptable: 'Aceitável',
-  good: 'Bom',
-  very_good: 'Muito Bom',
-  outstanding: 'Excepcional',
+  poor: { pt: 'Deficiente', en: 'Poor' },
+  acceptable: { pt: 'Aceitável', en: 'Acceptable' },
+  good: { pt: 'Bom', en: 'Good' },
+  very_good: { pt: 'Muito Bom', en: 'Very Good' },
+  outstanding: { pt: 'Excepcional', en: 'Outstanding' },
 };
 
-const TastingCard = ({ tasting, onDelete }) => {
+const TastingCard = ({ tasting, onDelete, language }) => {
   const quality = tasting.conclusion?.quality || 'good';
+  const qualityLabel = qualityLabels[quality] || qualityLabels.good;
   
   return (
     <Card className="wine-card border-border/40">
@@ -58,12 +59,12 @@ const TastingCard = ({ tasting, onDelete }) => {
                 {tasting.producer && `${tasting.producer} • `}
                 {tasting.vintage && `${tasting.vintage} • `}
                 {tasting.region && `${tasting.region} • `}
-                {new Date(tasting.created_at).toLocaleDateString('pt-BR')}
+                {new Date(tasting.created_at).toLocaleDateString(language === 'pt' ? 'pt-BR' : 'en-US')}
               </p>
             </div>
           </div>
           <span className={`px-3 py-1 rounded-sm text-xs font-medium ${qualityColors[quality] || qualityColors.good}`}>
-            {qualityLabels[quality] || quality}
+            {language === 'pt' ? qualityLabel.pt : qualityLabel.en}
           </span>
         </div>
         
