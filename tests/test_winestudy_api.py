@@ -312,5 +312,127 @@ class TestCountriesAndRegionsAPI:
             assert region["country_id"] == "france"
 
 
+class TestRegionDetailAPI:
+    """Tests for /api/regions/{region_id} endpoint - terroir, climate, and translations"""
+    
+    def test_get_bordeaux_region_with_terroir(self):
+        """Verify Bordeaux region has complete terroir data with PT/EN translations"""
+        response = requests.get(f"{BASE_URL}/api/regions/bordeaux")
+        assert response.status_code == 200
+        region = response.json()
+        
+        # Basic fields
+        assert region["region_id"] == "bordeaux"
+        assert region["country_id"] == "france"
+        assert region["name"] == "Bordeaux"
+        
+        # PT/EN name translations
+        assert region["name_pt"] == "Bordéus"
+        assert region["name_en"] == "Bordeaux"
+        
+        # PT/EN description translations
+        assert "description_pt" in region and len(region["description_pt"]) > 0
+        assert "description_en" in region and len(region["description_en"]) > 0
+        
+        # Terroir with PT/EN translations
+        assert "terroir" in region
+        terroir = region["terroir"]
+        assert "soil_pt" in terroir and "Cascalho" in terroir["soil_pt"]
+        assert "soil_en" in terroir and "Gravel" in terroir["soil_en"]
+        assert "altitude_pt" in terroir
+        assert "altitude_en" in terroir
+        assert "maritime_influence" in terroir
+        assert terroir["maritime_influence"] == True
+        
+        # Climate with PT/EN translations
+        assert "climate" in region
+        climate = region["climate"]
+        assert "type_pt" in climate and "Oceânico" in climate["type_pt"]
+        assert "type_en" in climate and "Oceanic" in climate["type_en"]
+        assert "temperature_pt" in climate
+        assert "temperature_en" in climate
+        assert "rainfall_pt" in climate
+        assert "rainfall_en" in climate
+        
+        # Key grapes
+        assert "key_grapes" in region
+        assert "Cabernet Sauvignon" in region["key_grapes"]
+        assert "Merlot" in region["key_grapes"]
+    
+    def test_get_tuscany_region_with_terroir(self):
+        """Verify Tuscany region has complete terroir data"""
+        response = requests.get(f"{BASE_URL}/api/regions/tuscany")
+        assert response.status_code == 200
+        region = response.json()
+        
+        assert region["region_id"] == "tuscany"
+        assert region["name_pt"] == "Toscana"
+        assert region["name_en"] == "Tuscany"
+        
+        # Terroir
+        terroir = region["terroir"]
+        assert "Galestro" in terroir["soil_pt"]
+        assert "Galestro" in terroir["soil_en"]
+        
+        # Climate
+        climate = region["climate"]
+        assert "Mediterrâneo" in climate["type_pt"]
+        assert "Mediterranean" in climate["type_en"]
+        
+        # Key grapes
+        assert "Sangiovese" in region["key_grapes"]
+    
+    def test_get_napa_valley_region_with_terroir(self):
+        """Verify Napa Valley region has complete terroir data"""
+        response = requests.get(f"{BASE_URL}/api/regions/napa_valley")
+        assert response.status_code == 200
+        region = response.json()
+        
+        assert region["region_id"] == "napa_valley"
+        assert region["name_pt"] == "Vale de Napa"
+        assert region["name_en"] == "Napa Valley"
+        
+        # Terroir
+        terroir = region["terroir"]
+        assert "Vulcânico" in terroir["soil_pt"]
+        assert "Volcanic" in terroir["soil_en"]
+        
+        # Climate
+        climate = region["climate"]
+        assert "Mediterrâneo" in climate["type_pt"]
+        assert "Mediterranean" in climate["type_en"]
+        
+        # Key grapes
+        assert "Cabernet Sauvignon" in region["key_grapes"]
+    
+    def test_get_nonexistent_region_returns_404(self):
+        """Verify 404 for non-existent region"""
+        response = requests.get(f"{BASE_URL}/api/regions/nonexistent_region")
+        assert response.status_code == 404
+    
+    def test_all_regions_have_terroir_and_climate(self):
+        """Verify all regions have terroir and climate data"""
+        response = requests.get(f"{BASE_URL}/api/regions")
+        assert response.status_code == 200
+        regions = response.json()
+        
+        for region in regions:
+            # Check terroir exists and has required fields
+            assert "terroir" in region, f"Region {region['region_id']} missing terroir"
+            terroir = region["terroir"]
+            assert "soil_pt" in terroir, f"Region {region['region_id']} missing soil_pt"
+            assert "soil_en" in terroir, f"Region {region['region_id']} missing soil_en"
+            
+            # Check climate exists and has required fields
+            assert "climate" in region, f"Region {region['region_id']} missing climate"
+            climate = region["climate"]
+            assert "type_pt" in climate, f"Region {region['region_id']} missing type_pt"
+            assert "type_en" in climate, f"Region {region['region_id']} missing type_en"
+            
+            # Check key_grapes exists
+            assert "key_grapes" in region, f"Region {region['region_id']} missing key_grapes"
+            assert len(region["key_grapes"]) > 0, f"Region {region['region_id']} has empty key_grapes"
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
