@@ -109,7 +109,9 @@ class AromaTagResponse(BaseModel):
 
 class TastingNoteCreate(BaseModel):
     wine_name: str
+    producer: Optional[str] = None
     vintage: Optional[int] = None
+    region: Optional[str] = None  # Free text region field
     grape_ids: List[str] = []
     region_id: Optional[str] = None
     appearance: Dict[str, Any]
@@ -123,8 +125,10 @@ class TastingNoteResponse(BaseModel):
     tasting_id: str
     user_id: str
     wine_name: str
+    producer: Optional[str] = None
     vintage: Optional[int] = None
-    grape_ids: List[str]
+    region: Optional[str] = None
+    grape_ids: List[str] = []
     region_id: Optional[str] = None
     appearance: Dict[str, Any]
     nose: Dict[str, Any]
