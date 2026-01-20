@@ -322,7 +322,7 @@ const RegionDetailPage = () => {
 
           {/* Sidebar */}
           <div className="space-y-6">
-            {/* Main Grapes */}
+            {/* Main Grapes - use key_grapes if main_grapes is empty */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -330,13 +330,15 @@ const RegionDetailPage = () => {
             >
               <Card className="border-border/40">
                 <CardHeader>
-                  <CardTitle className="font-serif text-lg">Castas Principais</CardTitle>
+                  <CardTitle className="font-serif text-lg">
+                    {language === 'pt' ? 'Castas Principais' : 'Main Grapes'}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  {region.main_grapes?.map((grape, index) => (
+                  {(region.key_grapes?.length > 0 ? region.key_grapes : region.main_grapes)?.map((grape, index) => (
                     <div key={index} className="flex items-center justify-between p-2 hover:bg-muted/30 rounded-sm">
-                      <span>{grape}</span>
-                      <GlassWater className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-medium">{grape}</span>
+                      <GlassWater className="w-4 h-4 text-wine-500" />
                     </div>
                   ))}
                 </CardContent>
