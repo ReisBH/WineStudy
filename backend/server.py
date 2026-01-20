@@ -2653,31 +2653,19 @@ Wrong temperature is the most common mistake:
 
 @api_router.post("/seed/regions-complete")
 async def seed_complete_regions():
-    """Seed the database with all wine regions mentioned in grape varieties"""
+    """Seed the database with all wine regions with complete terroir information"""
     
-    # Get current regions count
-    current_count = await db.regions.count_documents({})
-    if current_count > 50:
-        return {"message": "Regions already extensively seeded", "region_count": current_count}
+    # Clear existing regions and insert new ones with complete data
+    await db.regions.delete_many({})
+    await db.regions.insert_many(COMPLETE_REGIONS)
     
-    # Complete list of wine regions organized by country
-    regions_data = [
-        # FRANCE
-        {"region_id": "bordeaux", "name": "Bordeaux", "name_pt": "Bordéus", "name_en": "Bordeaux", "country_id": "france",
-         "description_pt": "A região mais famosa do mundo, conhecida por seus blends de Cabernet Sauvignon, Merlot e Cabernet Franc. Dividida em Margem Esquerda e Margem Direita.",
-         "description_en": "The world's most famous region, known for its Cabernet Sauvignon, Merlot and Cabernet Franc blends. Divided into Left Bank and Right Bank.",
-         "climate": "Oceanic", "key_grapes": ["Cabernet Sauvignon", "Merlot", "Cabernet Franc", "Sémillon", "Sauvignon Blanc"]},
-        {"region_id": "burgundy", "name": "Burgundy", "name_pt": "Borgonha", "name_en": "Burgundy", "country_id": "france",
-         "description_pt": "Berço do Pinot Noir e Chardonnay de classe mundial. Sistema de classificação complexo baseado em climat (vinhedos individuais).",
-         "description_en": "Birthplace of world-class Pinot Noir and Chardonnay. Complex classification system based on climat (individual vineyards).",
-         "climate": "Continental", "key_grapes": ["Pinot Noir", "Chardonnay"]},
-        {"region_id": "champagne", "name": "Champagne", "name_pt": "Champagne", "name_en": "Champagne", "country_id": "france",
-         "description_pt": "Região exclusiva para produção de espumantes pelo método tradicional. Apenas vinhos daqui podem ser chamados de Champagne.",
-         "description_en": "Exclusive region for traditional method sparkling production. Only wines from here can be called Champagne.",
-         "climate": "Cool continental", "key_grapes": ["Chardonnay", "Pinot Noir", "Pinot Meunier"]},
-        {"region_id": "rhone", "name": "Rhône", "name_pt": "Ródano", "name_en": "Rhône", "country_id": "france",
-         "description_pt": "Dividida em Norte (Syrah elegante) e Sul (blends com Grenache). Inclui denominações como Côte-Rôtie, Hermitage e Châteauneuf-du-Pape.",
-         "description_en": "Divided into North (elegant Syrah) and South (Grenache blends). Includes appellations like Côte-Rôtie, Hermitage and Châteauneuf-du-Pape.",
+    return {
+        "message": "Complete regions database seeded successfully",
+        "regions_added": len(COMPLETE_REGIONS),
+        "countries_covered": len(set(r["country_id"] for r in COMPLETE_REGIONS))
+    }
+
+# Include router
          "climate": "Mediterranean (south), Continental (north)", "key_grapes": ["Syrah", "Grenache", "Mourvèdre", "Viognier", "Marsanne", "Roussanne"]},
         {"region_id": "loire", "name": "Loire Valley", "name_pt": "Vale do Loire", "name_en": "Loire Valley", "country_id": "france",
          "description_pt": "O jardim da França, com grande diversidade de estilos. Famosa por Sauvignon Blanc (Sancerre), Chenin Blanc (Vouvray) e Cabernet Franc (Chinon).",
