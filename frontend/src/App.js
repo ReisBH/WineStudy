@@ -92,7 +92,7 @@ const AppRouter = () => {
       } />
       <Route path="/tasting/:tastingId" element={
         <ProtectedRoute>
-          <Layout><TastingListPage /></Layout>
+          <Layout><TastingDetailPage /></Layout>
         </ProtectedRoute>
       } />
 
