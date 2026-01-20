@@ -525,7 +525,7 @@ async def get_grapes_by_aroma(tag_id: str):
 
 # ======================== TASTING ROUTES ========================
 
-@api_router.post("/tastings", response_model=TastingNoteResponse)
+@api_router.post("/tastings", response_model=TastingNoteResponse, status_code=201)
 async def create_tasting(tasting: TastingNoteCreate, user: dict = Depends(get_current_user)):
     tasting_id = f"tasting_{uuid.uuid4().hex[:12]}"
     tasting_doc = {
