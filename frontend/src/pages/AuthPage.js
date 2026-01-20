@@ -235,10 +235,12 @@ const AuthPage = ({ mode = 'login' }) => {
         <div className="relative h-full flex items-center justify-center p-12">
           <div className="text-center text-white">
             <h2 className="font-serif text-4xl font-bold mb-4">
-              Descubra o Mundo do Vinho
+              {language === 'pt' ? 'Descubra o Mundo do Vinho' : 'Discover the World of Wine'}
             </h2>
             <p className="text-wine-100 text-lg max-w-md">
-              Atlas mundial, trilhas de estudo e diário de degustação em uma única plataforma.
+              {language === 'pt' 
+                ? 'Atlas mundial, trilhas de estudo e diário de degustação em uma única plataforma.'
+                : 'World atlas, study tracks, and tasting diary in a single platform.'}
             </p>
           </div>
         </div>
