@@ -69,6 +69,9 @@ Aplicativo educacional para estudo de vinhos com foco em conteúdo WSET, incluin
 - [ ] **Exportar Degustação como PDF** - Gerar relatório para impressão
 
 ### 🔵 Futuro (P2/P3)
+- [ ] Expandir Banco de Questões - Mais perguntas por módulo
+- [ ] Filtros Avançados - Combinação de múltiplos filtros
+- [ ] Página de Perfil - Histórico de degustações, progresso
 - [ ] Modo Escuro
 - [ ] Upload de fotos de rótulos
 - [ ] Gráfico de Relações (castas, regiões, aromas)
