@@ -199,6 +199,7 @@ const StudyPage = () => {
                 track={track} 
                 progress={progress}
                 language={language}
+                t={t}
                 delay={index * 0.1}
               />
             ))}
@@ -214,7 +215,9 @@ const StudyPage = () => {
         >
           <Card className="border-border/40">
             <CardHeader>
-              <CardTitle className="font-serif">Como funciona o aprendizado</CardTitle>
+              <CardTitle className="font-serif">
+                {language === 'pt' ? 'Como funciona o aprendizado' : 'How learning works'}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-3 gap-6">
