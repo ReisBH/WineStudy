@@ -79,7 +79,8 @@ Build a comprehensive wine education application (WineStudy) with:
 - [x] ~~Expand quiz question bank~~
 - [x] ~~Add region detail pages~~
 - [x] ~~Add grape detail pages~~
-- [ ] Country detail pages with full information
+- [x] ~~Country detail pages with full information~~
+- [x] ~~Aroma filter translations (PT/EN)~~
 
 ### P1 - High Priority
 - [ ] Google Drive integration for image backup
