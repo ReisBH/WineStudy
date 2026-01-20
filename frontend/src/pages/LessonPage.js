@@ -63,7 +63,7 @@ const LessonPage = () => {
 
   const handleComplete = async () => {
     if (!isAuthenticated) {
-      toast.error('Faça login para salvar seu progresso');
+      toast.error(language === 'pt' ? 'Faça login para salvar seu progresso' : 'Login to save your progress');
       return;
     }
 
@@ -78,14 +78,14 @@ const LessonPage = () => {
           ...prev,
           completed_lessons: [...(prev?.completed_lessons || []), currentLesson.lesson_id]
         }));
-        toast.success('Lição concluída!');
+        toast.success(language === 'pt' ? 'Lição concluída!' : 'Lesson completed!');
         
         if (nextLesson) {
           navigate(`/study/${trackId}/${nextLesson.lesson_id}`);
         }
       }
     } catch (error) {
-      toast.error('Erro ao salvar progresso');
+      toast.error(language === 'pt' ? 'Erro ao salvar progresso' : 'Error saving progress');
     }
   };
 
