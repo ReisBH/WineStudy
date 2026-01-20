@@ -1,133 +1,138 @@
-# WineStudy - Product Requirements Document
+# WineStudy - PRD (Product Requirements Document)
 
-## Original Problem Statement
-Build a comprehensive wine education application (WineStudy) with:
-1. World Wine Atlas - Global coverage (Old World & New World)
-2. Study Platform - Progressive learning (basic/intermediate/advanced)
-3. Tasting Diary - WSET Systematic Approach to Tasting (SAT)
-4. Filter System - By grapes, regions, countries, styles, aromatic notes
-5. Quiz System - Multiple choice, true/false, WSET-style questions
-6. Relational aromatic notes system
+## Descrição do Produto
+Aplicativo educacional para estudo de vinhos com foco em conteúdo WSET, incluindo atlas mundial, banco de castas, trilhas de estudo e diário de degustação.
 
-## User Choices
-- Authentication: JWT + Google OAuth
-- OCR: Not in MVP (future phase with Google Drive)
-- Images: No upload in MVP (future Google Drive integration)
-- Language: Multilingual (Portuguese + English)
-- Design: Premium editorial wine style (off-white + burgundy)
+## Requisitos Originais
+1. Atlas Mundial de Vinhos - Conteúdo sobre países e regiões do Velho e Novo Mundo
+2. Plataforma de Estudo - Níveis básico, intermediário e avançado
+3. Diário de Degustação - Formulário baseado na sistemática WSET (SAT)
+4. Sistema de Filtros - Por castas, regiões, países, estilos e notas aromáticas
+5. Sistema Relacional de Castas - Notas aromáticas clicáveis
+6. Módulo de Métodos de Produção
+7. Banco de Questões - Quizzes com feedback
+8. UI/UX Premium - Tons off-white e bordô, tipografia serif + sans
 
-## User Personas
-1. **Wine Enthusiast** - Casual learner wanting to understand wine basics
-2. **WSET Student** - Preparing for certifications, needs structured study
-3. **Sommelier Trainee** - Professional training, needs WSET SAT practice
-4. **Wine Professional** - Reference tool for regions and grapes
+## Stack Tecnológico
+- **Backend:** FastAPI (Python)
+- **Frontend:** React.js + TailwindCSS
+- **Database:** MongoDB
+- **Autenticação:** JWT + Google OAuth (Emergent-managed)
+- **UI Components:** Shadcn/UI
 
-## Core Requirements (Static)
-- ✅ User authentication (JWT + Google OAuth)
-- ✅ Multilingual support (PT/EN)
-- ✅ Dark/Light theme
-- ✅ Atlas with countries and regions
-- ✅ Grape database with relational aromas
-- ✅ Study tracks (3 levels)
-- ✅ Quiz system with feedback
-- ✅ Tasting diary with WSET SAT form
-- ✅ Progress tracking
+---
 
-## What's Been Implemented (January 2026)
+## Status de Implementação
 
-### Backend (FastAPI + MongoDB)
-- Authentication endpoints (register, login, logout, session)
-- Wine data APIs (countries, regions, grapes, aromas)
-- Study APIs (tracks, lessons, progress)
-- Quiz APIs (questions, submit answers)
-- Tasting APIs (CRUD operations)
-- Database seeding with comprehensive wine data
-- **Content expansion endpoint for educational content**
+### ✅ P0 - Concluído (Janeiro 2025)
+- [x] Setup do ambiente (Backend, Frontend, MongoDB)
+- [x] Autenticação JWT + Google Social Login
+- [x] Design premium com paleta bordô/off-white
+- [x] Páginas: Landing, Atlas, Castas, Estudo, Dashboard
+- [x] Páginas de detalhes: Países, Regiões, Castas
+- [x] **81 castas de uva** (43 tintas, 38 brancas) de 11 países
+- [x] Filtros por tipo (tinto/branco) e aromas
+- [x] Seed completo de dados
 
-### Frontend (React)
-- Landing page with premium editorial design
-- Atlas page with Old/New World filters
-- **Region detail pages with terroir, climate, appellations, wine styles**
-- Grapes page with type and aroma filters
-- **Grape detail pages with aromatic profile, structure, best regions**
-- Study area with 3 learning tracks
-- Lesson viewer with progress tracking
-- Quiz page with immediate feedback
-- Tasting form with complete WSET SAT fields
-- Dashboard with user progress
-- Language toggle (PT/EN)
-- Theme toggle (light/dark)
-- Responsive design
-- **Breadcrumb navigation on detail pages**
+### ✅ P1 - Concluído (Janeiro 2025)
+- [x] **Trilha de Estudo Avançada** - 10 lições completas
+  - Análise Sensorial Avançada (WSET SAT)
+  - Grandes Vinhos da Itália
+  - Grandes Vinhos da Espanha
+  - Vinhos do Novo Mundo
+  - Harmonização Avançada
+  - Serviço e Armazenamento
+- [x] **Diário de Degustação** - Formulário WSET SAT
+  - Informações do vinho
+  - Aparência, Nariz, Paladar
+  - Conclusão (qualidade, potencial de guarda)
+  - Página de listagem e detalhe
+- [x] Página de visualização de degustação individual
+- [x] Trilhas de estudo com contagem correta de lições
 
-### Database Seed Data
-- 10 Countries (5 Old World, 5 New World)
-- 10 Regions (Bordeaux, Burgundy, Champagne, etc.)
-- 12 Grape varieties (with aromatic profiles)
-- 24 Aroma tags (categorized)
-- 3 Study tracks
-- **17 Lessons total:**
-  - 5 Basic (Wine fundamentals)
-  - **8 Intermediate (Terroir, Bordeaux, Burgundy, Winemaking, Sparkling, Fortified, Italy & Spain)**
-  - **4 Advanced (Pinot Noir comparison, Human decisions, Aging, Typicity vs Innovation)**
-- **16 Quiz questions (Basic, Intermediate, Advanced)**
+### 🟡 P2 - Próximas Tarefas
+- [ ] **Tags de Aroma Relacionais** - Clicar em um aroma mostra castas/vinhos relacionados
+- [ ] **Expandir Banco de Questões** - Mais perguntas por módulo
+- [ ] **Módulo de Métodos de Produção** - Seção educacional dedicada
+- [ ] **Filtros Avançados** - Combinação de múltiplos filtros
+- [ ] **Página de Perfil** - Histórico de degustações, progresso nos estudos
 
-## Prioritized Backlog
+### 🔵 P3 - Futuro
+- [ ] Modo Escuro
+- [ ] Integração Google Drive (backup de imagens)
+- [ ] Gráfico de Relações (castas, regiões, aromas)
+- [ ] Estatísticas de progresso do usuário
+- [ ] Upload de fotos de rótulos
 
-### P0 - Critical (Future MVP Enhancements)
-- [x] ~~Add more lessons for intermediate and advanced tracks~~
-- [x] ~~Expand quiz question bank~~
-- [x] ~~Add region detail pages~~
-- [x] ~~Add grape detail pages~~
-- [x] ~~Country detail pages with full information~~
-- [x] ~~Aroma filter translations (PT/EN)~~
+---
 
-### P1 - High Priority
-- [ ] Google Drive integration for image backup
-- [ ] OCR for wine label recognition
-- [ ] Wine recommendations based on preferences
-- [ ] Social sharing of tastings
+## Dados do Sistema
 
-### P2 - Medium Priority
-- [ ] Badges and gamification
-- [ ] Leaderboard
-- [ ] Wine pairing suggestions
-- [ ] Glossary section
-- [ ] Community features (comments, reviews)
+### Castas de Uva (81 total)
+| País | Tintas | Brancas |
+|------|--------|---------|
+| França | 12 | 11 |
+| Itália | 11 | 9 |
+| Espanha | 6 | 6 |
+| Portugal | 7 | 5 |
+| Alemanha | 2 | 6 |
+| Áustria | 0 | 1 |
+| EUA | 2 | 0 |
+| Argentina | 0 | 1 |
+| Chile | 1 | 0 |
+| Uruguai | 1 | 0 |
+| África do Sul | 1 | 0 |
 
-### P3 - Nice to Have
-- [ ] Offline mode (PWA)
-- [ ] Push notifications
-- [ ] Export tasting notes as PDF
-- [ ] Wine cellar management
+### Trilhas de Estudo
+| Trilha | Nível | Lições | Duração |
+|--------|-------|--------|---------|
+| Fundamentos do Vinho | Básico | 5 | ~60 min |
+| Terroir e Regiões | Intermediário | 8 | ~96 min |
+| Mestria em Vinhos | Avançado | 10 | ~120 min |
 
-## Tech Stack
-- **Frontend**: React 19, Tailwind CSS, Framer Motion, Shadcn UI
-- **Backend**: FastAPI, Motor (async MongoDB)
-- **Database**: MongoDB
-- **Authentication**: JWT + Emergent Google OAuth
-- **Deployment**: Kubernetes (Emergent Platform)
+### Endpoints Principais
+- `/api/grapes` - Lista e filtra castas
+- `/api/countries` - Países vinícolas
+- `/api/regions` - Regiões por país
+- `/api/study/tracks` - Trilhas de estudo
+- `/api/study/tracks/{id}/lessons` - Lições por trilha
+- `/api/tastings` - CRUD de degustações (autenticado)
+- `/api/aromas` - Tags de aroma
+- `/api/quiz/tracks/{id}/questions` - Questões por trilha
 
-## Architecture
+---
+
+## Arquitetura de Arquivos
 ```
-/app
+/app/
 ├── backend/
-│   ├── server.py          # Main FastAPI app with all routes
-│   └── .env               # Environment variables
+│   ├── server.py          # API FastAPI completa
+│   ├── grape_data.py      # Dados das 81 castas
+│   ├── requirements.txt
+│   └── .env
 ├── frontend/
 │   ├── src/
-│   │   ├── pages/         # Page components
-│   │   ├── components/    # Reusable components
-│   │   ├── contexts/      # Auth & Language contexts
-│   │   └── utils/         # Translations
-│   └── .env               # Frontend env variables
+│   │   ├── pages/         # Todas as páginas
+│   │   ├── components/    # UI components
+│   │   ├── contexts/      # Auth e Language
+│   │   └── utils/         # Traduções
+│   └── package.json
+├── tests/
+│   └── test_winestudy_api.py  # 27 testes pytest
 └── memory/
-    └── PRD.md             # This document
+    └── PRD.md
 ```
 
-## Next Action Items
-1. Add more educational content (lessons, questions)
-2. Implement region and grape detail pages
-3. Add more visual elements (maps, charts)
-4. Consider adding user-generated content features
-5. Implement Google Drive integration for phase 2
+---
+
+## Testes
+- **27 testes pytest** passando
+- Cobertura: APIs de castas, estudo, degustações, autenticação
+- Arquivo: `/app/tests/test_winestudy_api.py`
+
+---
+
+## Notas de Desenvolvimento
+- MongoDB usado em vez de PostgreSQL (decisão baseada no ambiente)
+- Dados de seed em `/app/backend/grape_data.py`
+- Endpoints de seed: `/api/seed`, `/api/seed/expand`, `/api/seed/grapes-complete`, `/api/seed/expand-advanced`
