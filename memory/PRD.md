@@ -50,10 +50,15 @@ Aplicativo educacional para estudo de vinhos com foco em conteúdo WSET, incluin
 **Expansão de Regiões (P2):**
 - [x] **78 regiões** de **13 países**
 - [x] Descrições bilíngues, clima, uvas principais
+- [x] **Página de Detalhe da Região com Terroir Completo** (20/01/2026)
+  - Terroir: tipo de solo, altitude, influência marítima
+  - Clima: tipo, temperatura, precipitação
+  - Traduções PT/EN em todos os campos
+  - Castas principais clicáveis
 
 ---
 
-### 🟡 Próximas Tarefas (P2)
+### 🟡 Próximas Tarefas (P1)
 - [ ] **Expandir Banco de Questões** - Mais perguntas por módulo
 - [ ] **Filtros Avançados** - Combinação de múltiplos filtros
 - [ ] **Página de Perfil** - Histórico de degustações, progresso
