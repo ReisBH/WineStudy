@@ -4,11 +4,48 @@
 Aplicativo educacional para estudo de vinhos com foco em conteúdo WSET, incluindo atlas mundial, banco de castas, trilhas de estudo e diário de degustação.
 
 ## Stack Tecnológico
-- **Backend:** FastAPI (Python)
+
+### Produção (Netlify)
+- **Backend:** Netlify Functions (Node.js)
 - **Frontend:** React.js + TailwindCSS
+- **Database:** PostgreSQL (Neon)
+- **Autenticação:** JWT + Google OAuth
+- **UI Components:** Shadcn/UI
+
+### Desenvolvimento Local
+- **Backend:** FastAPI (Python)
 - **Database:** MongoDB
 - **Autenticação:** JWT + Google OAuth (Emergent-managed)
-- **UI Components:** Shadcn/UI
+
+---
+
+## Migração para Netlify (21/01/2026)
+
+**Estrutura de Deploy:**
+```
+/app/
+├── netlify.toml              # Configuração do Netlify
+├── frontend/                 # React app
+├── netlify/
+│   ├── functions/           # Serverless functions
+│   │   ├── auth-*.js        # Autenticação
+│   │   ├── countries.js     # API de países
+│   │   ├── regions.js       # API de regiões
+│   │   ├── grapes.js        # API de castas
+│   │   ├── tastings.js      # API de degustações
+│   │   ├── study.js         # API de estudos
+│   │   ├── quiz.js          # API de quiz
+│   │   └── utils/           # Helpers
+│   └── schema.sql           # Schema PostgreSQL
+└── DEPLOY_NETLIFY.md        # Instruções de deploy
+```
+
+**Dados Migrados para Neon:**
+- 14 países
+- 78 regiões
+- 81 castas
+- 3 trilhas de estudo
+- 16 tags de aroma
 
 ---
 
