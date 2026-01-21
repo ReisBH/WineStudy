@@ -1,16 +1,107 @@
 [build]
   publish = "frontend/build"
-  command = "cd frontend && npm run build"
+  command = "cd frontend && yarn install && yarn build"
   functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "18"
 
 [functions]
   node_bundler = "esbuild"
+  directory = "netlify/functions"
 
+# Redirect API calls to Netlify Functions
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  from = "/api/auth/register"
+  to = "/.netlify/functions/auth-register"
   status = 200
 
+[[redirects]]
+  from = "/api/auth/login"
+  to = "/.netlify/functions/auth-login"
+  status = 200
+
+[[redirects]]
+  from = "/api/auth/me"
+  to = "/.netlify/functions/auth-me"
+  status = 200
+
+[[redirects]]
+  from = "/api/auth/session"
+  to = "/.netlify/functions/auth-session"
+  status = 200
+
+[[redirects]]
+  from = "/api/countries/*"
+  to = "/.netlify/functions/countries"
+  status = 200
+
+[[redirects]]
+  from = "/api/countries"
+  to = "/.netlify/functions/countries"
+  status = 200
+
+[[redirects]]
+  from = "/api/regions/*"
+  to = "/.netlify/functions/regions"
+  status = 200
+
+[[redirects]]
+  from = "/api/regions"
+  to = "/.netlify/functions/regions"
+  status = 200
+
+[[redirects]]
+  from = "/api/grapes/*"
+  to = "/.netlify/functions/grapes"
+  status = 200
+
+[[redirects]]
+  from = "/api/grapes"
+  to = "/.netlify/functions/grapes"
+  status = 200
+
+[[redirects]]
+  from = "/api/aromas/*"
+  to = "/.netlify/functions/aromas"
+  status = 200
+
+[[redirects]]
+  from = "/api/aromas"
+  to = "/.netlify/functions/aromas"
+  status = 200
+
+[[redirects]]
+  from = "/api/tastings/*"
+  to = "/.netlify/functions/tastings"
+  status = 200
+
+[[redirects]]
+  from = "/api/tastings"
+  to = "/.netlify/functions/tastings"
+  status = 200
+
+[[redirects]]
+  from = "/api/study/*"
+  to = "/.netlify/functions/study"
+  status = 200
+
+[[redirects]]
+  from = "/api/quiz/*"
+  to = "/.netlify/functions/quiz"
+  status = 200
+
+[[redirects]]
+  from = "/api/progress"
+  to = "/.netlify/functions/progress"
+  status = 200
+
+[[redirects]]
+  from = "/api/seed"
+  to = "/.netlify/functions/seed"
+  status = 200
+
+# SPA fallback
 [[redirects]]
   from = "/*"
   to = "/index.html"
