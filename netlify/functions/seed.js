@@ -1,5 +1,5 @@
-const { pool } = require('../utils/db');
-const { success, error } = require('../utils/response');
+const { pool } = require('./utils/db');
+const { success, error } = require('./utils/response');
 
 // Seed data
 const COUNTRIES = [

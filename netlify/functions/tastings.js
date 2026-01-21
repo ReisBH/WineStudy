@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
-const { pool } = require('../utils/db');
-const { getUserFromRequest } = require('../utils/auth');
-const { success, error, parseBody } = require('../utils/response');
+const { pool } = require('./utils/db');
+const { getUserFromRequest } = require('./utils/auth');
+const { success, error, parseBody } = require('./utils/response');
 
 exports.handler = async (event, context) => {
   if (event.httpMethod === 'OPTIONS') {

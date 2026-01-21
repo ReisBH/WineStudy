@@ -1,5 +1,5 @@
-const { pool } = require('../utils/db');
-const { success, error } = require('../utils/response');
+const { pool } = require('./utils/db');
+const { success, error } = require('./utils/response');
 
 exports.handler = async (event, context) => {
   if (event.httpMethod === 'OPTIONS') {

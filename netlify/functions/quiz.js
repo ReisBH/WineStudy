@@ -1,6 +1,6 @@
-const { pool } = require('../utils/db');
-const { getUserFromRequest } = require('../utils/auth');
-const { success, error, parseBody, getQueryParams } = require('../utils/response');
+const { pool } = require('./utils/db');
+const { getUserFromRequest } = require('./utils/auth');
+const { success, error, parseBody, getQueryParams } = require('./utils/response');
 
 exports.handler = async (event, context) => {
   if (event.httpMethod === 'OPTIONS') {

@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
-const { pool } = require('../utils/db');
-const { generateToken } = require('../utils/auth');
-const { success, error, parseBody, setCookie } = require('../utils/response');
+const { pool } = require('./utils/db');
+const { generateToken } = require('./utils/auth');
+const { success, error, parseBody, setCookie } = require('./utils/response');
 
 exports.handler = async (event, context) => {
   // Handle CORS preflight
