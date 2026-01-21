@@ -11,7 +11,7 @@ import { Badge } from '../components/ui/badge';
 import { Separator } from '../components/ui/separator';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${BACKEND_URL}/api`;
 
 const InfoItem = ({ icon: Icon, label, value, color = "text-wine-500" }) => (

@@ -11,7 +11,7 @@ import { Progress } from '../components/ui/progress';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${BACKEND_URL}/api`;
 
 const StatCard = ({ icon: Icon, label, value, color, delay }) => (
