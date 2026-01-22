@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    },
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/countries/(.*)",
+      "destination": "/api/countries"
+    },
+    {
+      "source": "/api/regions/(.*)",
+      "destination": "/api/regions"
+    },
+    {
+      "source": "/api/grapes/(.*)",
+      "destination": "/api/grapes"
+    },
+    {
+      "source": "/api/aromas/(.*)",
+      "destination": "/api/aromas"
+    },
+    {
+      "source": "/api/tastings/(.*)",
+      "destination": "/api/tastings"
+    },
+    {
+      "source": "/api/study/(.*)",
+      "destination": "/api/study"
+    },
+    {
+      "source": "/api/quiz/(.*)",
+      "destination": "/api/quiz"
+    },
+    {
+      "source": "/api/lessons/(.*)",
+      "destination": "/api/lessons"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
